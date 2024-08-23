@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfetbcr0kkf7r"]
+
+[ext_resource type="Script" path="res://world/system camera/MODCamTopDownMovement.gd" id="1_juy0d"]
+
+[node name="CamTopDown" type="Node"]
+script = ExtResource("1_juy0d")

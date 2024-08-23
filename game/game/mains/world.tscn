@@ -1,0 +1,470 @@
+[gd_scene load_steps=60 format=3 uid="uid://djgl7i0c0pavh"]
+
+[ext_resource type="Script" path="res://world/WorldInit.gd" id="1_gmfkh"]
+[ext_resource type="PackedScene" uid="uid://1desgh3x7s5c" path="res://world/system camera/mod_cam_shake.tscn" id="2_dlgoo"]
+[ext_resource type="PackedScene" uid="uid://cfetbcr0kkf7r" path="res://world/system camera/mod_cam_top_down_movement.tscn" id="3_4kcqj"]
+[ext_resource type="PackedScene" uid="uid://dkjifnrjbb2e2" path="res://world/environment/campfire_logs_2.tscn" id="4_54ugu"]
+[ext_resource type="Script" path="res://player/PlayerMovement.gd" id="5_c81ai"]
+[ext_resource type="Script" path="res://player/SkillManager.gd" id="6_7mmml"]
+[ext_resource type="Script" path="res://player/SkillShooting.gd" id="7_p1vfv"]
+[ext_resource type="Script" path="res://player/SkillSlashing.gd" id="8_cwhqs"]
+[ext_resource type="Script" path="res://player/weapons/RangeWeapon.gd" id="9_28r0u"]
+[ext_resource type="PackedScene" uid="uid://bqxe1645pw8ku" path="res://player/weapons/projectile.tscn" id="10_vc7d8"]
+[ext_resource type="Script" path="res://player/weapons/MeleeWeapon.gd" id="11_pnwml"]
+[ext_resource type="PackedScene" uid="uid://df1d5ue4b8yps" path="res://game/collectibles/soul_collectible.tscn" id="12_vo1b3"]
+[ext_resource type="Script" path="res://system ai/MODRangeObservePlayer.gd" id="13_gxyf2"]
+
+[sub_resource type="Environment" id="Environment_1jtgr"]
+background_mode = 1
+background_color = Color(0.552941, 0.619608, 0.760784, 1)
+sdfgi_enabled = true
+glow_enabled = true
+glow_intensity = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jpsl3"]
+albedo_color = Color(0.364706, 0.364706, 0.364706, 1)
+albedo_texture_force_srgb = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_cnlfa"]
+material = SubResource("StandardMaterial3D_jpsl3")
+size = Vector2(150, 150)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1l64s"]
+size = Vector3(150, 0.2, 150)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xpbdt"]
+radius = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3vu57"]
+albedo_color = Color(0.364706, 0.364706, 0.364706, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_tqafl"]
+material = SubResource("StandardMaterial3D_3vu57")
+top_radius = 0.15
+bottom_radius = 0.15
+height = 0.1
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_x56xo"]
+radius = 0.3
+height = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jiisf"]
+albedo_color = Color(0.65098, 0.65098, 0.65098, 1)
+albedo_texture_msdf = true
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_f6v7s"]
+material = SubResource("StandardMaterial3D_jiisf")
+radius = 0.4
+height = 1.7
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ldlso"]
+albedo_color = Color(0.364706, 0.364706, 0.364706, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_rbux7"]
+material = SubResource("StandardMaterial3D_ldlso")
+top_radius = 0.05
+bottom_radius = 0.03
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lmnqb"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 14.62
+
+[sub_resource type="Curve" id="Curve_m4svp"]
+max_value = 3.0
+_data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(1, 0.386902), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_p35xg"]
+curve = SubResource("Curve_m4svp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s6aba"]
+emission_shape = 1
+emission_sphere_radius = 0.2
+direction = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+spread = 0.0
+initial_velocity_max = 25.51
+gravity = Vector3(2.08165e-12, 2.08165e-12, 1)
+attractor_interaction_enabled = false
+scale_min = 0.0
+scale_over_velocity_max = 8.0
+scale_over_velocity_curve = SubResource("CurveTexture_p35xg")
+
+[sub_resource type="SphereMesh" id="SphereMesh_f2ldq"]
+radius = 0.05
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b27o8"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_t0x1l"]
+material = SubResource("StandardMaterial3D_b27o8")
+radius = 0.2
+height = 0.4
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gn1jb"]
+radius = 0.4
+height = 1.7
+
+[sub_resource type="Curve" id="Curve_74f6a"]
+_data = [Vector2(0, 0.364618), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_l333u"]
+curve = SubResource("Curve_74f6a")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3sjgp"]
+gravity = Vector3(2.08165e-12, 2.08165e-12, -5)
+attractor_interaction_enabled = false
+scale_curve = SubResource("CurveTexture_l333u")
+
+[sub_resource type="Gradient" id="Gradient_s5fys"]
+offsets = PackedFloat32Array(0, 0.362573, 0.444444, 0.777778, 0.824561)
+colors = PackedColorArray(1, 1, 1, 0.152941, 0.423529, 0.423529, 0.423529, 0, 0, 0, 0, 0, 0.388235, 0.388235, 0.388235, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2qcvp"]
+gradient = SubResource("Gradient_s5fys")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0c4j6"]
+transparency = 1
+diffuse_mode = 3
+albedo_texture = SubResource("GradientTexture1D_2qcvp")
+albedo_texture_force_srgb = true
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+disable_receive_shadows = true
+
+[sub_resource type="TorusMesh" id="TorusMesh_errqb"]
+material = SubResource("StandardMaterial3D_0c4j6")
+inner_radius = 1.3
+outer_radius = 1.5
+rings = 12
+ring_segments = 3
+
+[sub_resource type="Curve" id="Curve_moa7a"]
+max_value = 3.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_gxu02"]
+curve = SubResource("Curve_moa7a")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_am5ki"]
+scale_over_velocity_max = 295.92
+scale_over_velocity_curve = SubResource("CurveTexture_gxu02")
+turbulence_noise_strength = 8.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_16sxl"]
+radius = 0.05
+height = 0.1
+
+[sub_resource type="Curve" id="Curve_1vm5d"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.980663, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_mno5s"]
+curve = SubResource("Curve_1vm5d")
+
+[sub_resource type="Curve" id="Curve_2ujdv"]
+max_value = 3.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 2.99084), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_tceyl"]
+curve = SubResource("Curve_2ujdv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pjdnw"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 20.0
+spread = 180.0
+initial_velocity_max = 360.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+scale_over_velocity_curve = SubResource("CurveTexture_tceyl")
+emission_curve = SubResource("CurveTexture_mno5s")
+hue_variation_min = -0.67
+hue_variation_max = 1.0
+turbulence_enabled = true
+turbulence_noise_strength = 11.09
+
+[sub_resource type="Curve" id="Curve_f0svr"]
+max_value = 3.0
+_data = [Vector2(0.0857988, 0.593199), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vi1t7"]
+curve = SubResource("Curve_f0svr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yvsor"]
+emission_shape = 1
+emission_sphere_radius = 2.0
+spread = 180.0
+initial_velocity_max = 1.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+radial_accel_min = -100.0
+attractor_interaction_enabled = false
+scale_over_velocity_curve = SubResource("CurveTexture_vi1t7")
+turbulence_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c85ye"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 8.84
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_buijf"]
+material = SubResource("StandardMaterial3D_c85ye")
+size = 0.2
+sections = 2
+section_length = 0.1
+section_segments = 1
+
+[sub_resource type="BoxMesh" id="BoxMesh_8yg41"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kqlb3"]
+albedo_color = Color(0.321569, 0.321569, 0.321569, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pakcn"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_1fyb0"]
+size = Vector3(0.4, 0.6, 0.4)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7yixe"]
+radius = 8.0
+
+[node name="World" type="Node3D"]
+
+[node name="Init" type="Node" parent="."]
+script = ExtResource("1_gmfkh")
+
+[node name="MainCam" type="Camera3D" parent="."]
+transform = Transform3D(1, -6.50845e-16, 1.74393e-16, 1.74393e-16, 0.5, 0.866025, -6.50845e-16, -0.866025, 0.5, 2.08165e-12, 20, 10)
+size = 30.0
+
+[node name="CamShake" parent="MainCam" instance=ExtResource("2_dlgoo")]
+
+[node name="CamTopDown" parent="MainCam" instance=ExtResource("3_4kcqj")]
+
+[node name="Env" type="Node3D" parent="."]
+
+[node name="Ambient" type="WorldEnvironment" parent="Env"]
+environment = SubResource("Environment_1jtgr")
+
+[node name="Sun" type="DirectionalLight3D" parent="Env"]
+transform = Transform3D(1, -6.92275e-16, 6.05662e-17, 6.05662e-17, 0.173648, 0.984808, -6.92275e-16, -0.984808, 0.173648, 0, 0, 0)
+shadow_enabled = true
+shadow_blur = 0.05
+
+[node name="campfire_logs2" parent="Env" instance=ExtResource("4_54ugu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.85329, 0.1, -5.8757)
+
+[node name="Terrain" type="StaticBody3D" parent="Env"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Env/Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.00269353)
+mesh = SubResource("PlaneMesh_cnlfa")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Env/Terrain"]
+shape = SubResource("BoxShape3D_1l64s")
+
+[node name="Player" type="CharacterBody3D" parent="." groups=["player"]]
+collision_layer = 2
+
+[node name="ScriptTopDownMovement" type="Node" parent="Player" node_paths=PackedStringArray("aimPointer")]
+script = ExtResource("5_c81ai")
+aimPointer = NodePath("../Weapon/WeaponRange/Aim")
+
+[node name="SkillManager" type="Node" parent="Player"]
+script = ExtResource("6_7mmml")
+
+[node name="SkillAttackRange" type="Node" parent="Player/SkillManager" node_paths=PackedStringArray("weaponRangeController")]
+script = ExtResource("7_p1vfv")
+weaponRangeController = NodePath("../../Weapon/WeaponRange/ScriptRangeWeapon")
+
+[node name="SkillAttackMelee" type="Node" parent="Player/SkillManager" node_paths=PackedStringArray("weaponMeleeController")]
+script = ExtResource("8_cwhqs")
+weaponMeleeController = NodePath("../../Weapon/WeaponMelee/ScriptMeleeWeapon")
+
+[node name="Weapon" type="Node3D" parent="Player"]
+
+[node name="WeaponRange" type="Node3D" parent="Player/Weapon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1, -0.5)
+
+[node name="ScriptRangeWeapon" type="Node" parent="Player/Weapon/WeaponRange" node_paths=PackedStringArray("nock", "fxSlash")]
+script = ExtResource("9_28r0u")
+projectile = ExtResource("10_vc7d8")
+nock = NodePath("../Nock")
+fxSlash = NodePath("../../../FXSlash")
+
+[node name="Aim" type="Marker3D" parent="Player/Weapon/WeaponRange"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.08165e-12, -1, 0.5)
+
+[node name="Nock" type="Marker3D" parent="Player/Weapon/WeaponRange"]
+
+[node name="WeaponMelee" type="Node3D" parent="Player/Weapon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.85, -0.5)
+
+[node name="ScriptMeleeWeapon" type="Node" parent="Player/Weapon/WeaponMelee" node_paths=PackedStringArray("hitBox", "fxSlash")]
+script = ExtResource("11_pnwml")
+hitBox = NodePath("../HitBox")
+fxSlash = NodePath("../../../FXSlash")
+
+[node name="HitBox" type="Area3D" parent="Player/Weapon/WeaponMelee"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/Weapon/WeaponMelee/HitBox"]
+shape = SubResource("SphereShape3D_xpbdt")
+
+[node name="Mesh" type="Node3D" parent="Player"]
+
+[node name="Body" type="Node3D" parent="Player/Mesh"]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Player/Mesh/Body"]
+transform = Transform3D(1, 0, 0, 0, 0.349292, 0.937014, 0, -0.937014, 0.349292, 0.25, 1.614, 2.08165e-12)
+mesh = SubResource("CylinderMesh_tqafl")
+skeleton = NodePath("../../../../Env/Terrain")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Player/Mesh/Body"]
+transform = Transform3D(1, 0, 0, 0, 0.349292, 0.937014, 0, -0.937014, 0.349292, -0.25, 1.614, 2.08165e-12)
+mesh = SubResource("CylinderMesh_tqafl")
+skeleton = NodePath("../../../../Env/Terrain")
+
+[node name="Eye" type="MeshInstance3D" parent="Player/Mesh/Body"]
+transform = Transform3D(1, -2.43456e-31, -1.5246e-23, -1.51607e-23, -0.105605, -0.994408, -1.61004e-24, 0.994408, -0.105605, 2.08165e-12, 1.41287, -0.196308)
+mesh = SubResource("CapsuleMesh_x56xo")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/Mesh/Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+mesh = SubResource("CapsuleMesh_f6v7s")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Player/Mesh/Body"]
+transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 0, 0.298567, 0.675099)
+mesh = SubResource("CylinderMesh_rbux7")
+skeleton = NodePath("../..")
+
+[node name="Soul" type="Node3D" parent="Player/Mesh"]
+visible = false
+
+[node name="FXWarp" type="GPUParticles3D" parent="Player/Mesh/Soul"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.626027, 0)
+material_override = SubResource("StandardMaterial3D_lmnqb")
+cast_shadow = 0
+amount = 100
+speed_scale = 29.07
+process_material = SubResource("ParticleProcessMaterial_s6aba")
+draw_pass_1 = SubResource("SphereMesh_f2ldq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/Mesh/Soul"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.656882, 0)
+cast_shadow = 0
+mesh = SubResource("SphereMesh_t0x1l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+shape = SubResource("CapsuleShape3D_gn1jb")
+
+[node name="FXSlash" type="GPUParticles3D" parent="Player"]
+transform = Transform3D(0.866025, -0.5, 3.48787e-16, 0.5, 0.866025, -3.48787e-16, -1.27665e-16, 4.76452e-16, 1, 2.08165e-12, 0.85, -0.5)
+cast_shadow = 0
+emitting = false
+amount = 1
+lifetime = 0.01
+one_shot = true
+speed_scale = 10.54
+fixed_fps = 24
+process_material = SubResource("ParticleProcessMaterial_3sjgp")
+draw_pass_1 = SubResource("TorusMesh_errqb")
+
+[node name="FXRunningDust" type="GPUParticles3D" parent="Player"]
+cast_shadow = 0
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_am5ki")
+draw_pass_1 = SubResource("SphereMesh_16sxl")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Player"]
+emitting = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_pjdnw")
+one_shot = true
+speed_scale = 4.0
+explosiveness = 1.0
+randomness = 1.0
+trail_enabled = true
+trail_lifetime = 0.08
+
+[node name="FXPoof" type="GPUParticles3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.75, 2.08165e-12)
+cast_shadow = 0
+emitting = false
+amount = 50
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_yvsor")
+draw_pass_1 = SubResource("RibbonTrailMesh_buijf")
+
+[node name="Collectibles" type="Node" parent="."]
+
+[node name="SoulCollectible" parent="Collectibles" instance=ExtResource("12_vo1b3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.05191, 0.1, 2.09593)
+
+[node name="SoulCollectible2" parent="Collectibles" instance=ExtResource("12_vo1b3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.48647, 0.1, -14.8245)
+
+[node name="SoulCollectible3" parent="Collectibles" instance=ExtResource("12_vo1b3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.260475, 0.1, 1.98441)
+
+[node name="SoulCollectible4" parent="Collectibles" instance=ExtResource("12_vo1b3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.06318, 0.1, 1.07459)
+
+[node name="SoulCollectible5" parent="Collectibles" instance=ExtResource("12_vo1b3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.55413, 0.1, 1.07459)
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Enemy01" type="StaticBody3D" parent="Enemies" groups=["enemy"]]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, -3.10343, 0, -11.2302)
+collision_layer = 4
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enemies/Enemy01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_8yg41")
+surface_material_override/0 = SubResource("StandardMaterial3D_kqlb3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/Enemy01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_pakcn")
+
+[node name="Face" type="MeshInstance3D" parent="Enemies/Enemy01"]
+transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 2.08165e-12, 0.6, -0.8)
+mesh = SubResource("PrismMesh_1fyb0")
+
+[node name="RangeObservePlayer" type="Area3D" parent="Enemies/Enemy01"]
+collision_mask = 2
+script = ExtResource("13_gxyf2")
+observeRadius = 20
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/Enemy01/RangeObservePlayer"]
+shape = SubResource("SphereShape3D_7yixe")
+
+[node name="Enemy02" type="StaticBody3D" parent="Enemies" groups=["enemy"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.47333, 0, -4.44122)
+collision_layer = 4
+
+[node name="Face" type="MeshInstance3D" parent="Enemies/Enemy02"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.726998, -0.726857)
+mesh = SubResource("PrismMesh_1fyb0")
+skeleton = NodePath("../../Enemy01")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enemies/Enemy02"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_8yg41")
+surface_material_override/0 = SubResource("StandardMaterial3D_kqlb3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/Enemy02"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_pakcn")

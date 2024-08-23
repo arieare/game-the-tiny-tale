@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://1desgh3x7s5c"]
+
+[ext_resource type="Script" path="res://world/system camera/MODCamShake.gd" id="1_elung"]
+
+[node name="CamShake" type="Node"]
+script = ExtResource("1_elung")
