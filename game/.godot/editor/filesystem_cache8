@@ -1,10 +1,28 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1724428943
+::res://::1724508963
 Icon.png::CompressedTexture2D::3040474937573247852::1716122534::1724428945::1::::<><>::
 README.md::TextFile::-1::1724428800::0::1::::<><>::
+::res://addons/::1724508903
+::res://addons/godot-jolt/::1724508904
+godot-jolt.gdextension::GDExtension::-1::1724508904::0::1::::<><>::
+LICENSE.txt::TextFile::-1::1724508904::0::1::::<><>::
+THIRDPARTY.txt::TextFile::-1::1724508904::0::1::::<><>::
+::res://addons/godot-jolt/android/::1724508904
+::res://addons/godot-jolt/ios/::1724508904
+::res://addons/godot-jolt/ios/godot-jolt_ios.framework/::1724508904
+::res://addons/godot-jolt/ios/godot-jolt_ios_editor.framework/::1724508904
+::res://addons/godot-jolt/linux/::1724508904
+::res://addons/godot-jolt/macos/::1724508904
+::res://addons/godot-jolt/macos/godot-jolt_macos.framework/::1724508904
+::res://addons/godot-jolt/macos/godot-jolt_macos.framework/_CodeSignature/::1724508904
+::res://addons/godot-jolt/macos/godot-jolt_macos.framework/Resources/::1724508904
+::res://addons/godot-jolt/macos/godot-jolt_macos_editor.framework/::1724508904
+::res://addons/godot-jolt/macos/godot-jolt_macos_editor.framework/_CodeSignature/::1724508904
+::res://addons/godot-jolt/macos/godot-jolt_macos_editor.framework/Resources/::1724508904
+::res://addons/godot-jolt/windows/::1724508904
 ::res://art/::1724425185
 ::res://art/models/::1716122534
-::res://art/models/Nature Kit/::1716447520
+::res://art/models/Nature Kit/::1724429037
 bed.glb::PackedScene::1174375676508526651::1716122534::1724429025::1::::<><>::
 bed_floor.glb::PackedScene::7983069399146404643::1716122534::1724429025::1::::<><>::
 bridge_center_stone.glb::PackedScene::7793523370093683957::1716122534::1724429024::1::::<><>::
@@ -334,11 +352,17 @@ tree_tall_fall.glb::PackedScene::4043191455765014183::1716122534::1724428978::1:
 tree_thin.glb::PackedScene::2064999860980136063::1716122534::1724428978::1::::<><>::
 tree_thin_dark.glb::PackedScene::7070621885338239662::1716122534::1724428977::1::::<><>::
 tree_thin_fall.glb::PackedScene::7574122352501441087::1716122534::1724428977::1::::<><>::
-::res://art/models/Objects/::1716447429
+::res://art/models/Objects/::1724428976
 90.glb::PackedScene::7385293627934346545::1716122534::1724428976::1::::<><>::uid://dwk6kmbp6wswy::::res://art/models/Objects/90_0.png<>uid://biyytwglxku8o::::res://art/models/Objects/90_1.png<>uid://dbdwvfbd8kpuv::::res://art/models/Objects/90_2.png
 90_0.png::CompressedTexture2D::8725961105920272908::1716122534::1724428944::1::::<><>::
 90_1.png::CompressedTexture2D::2998968802118855264::1716122534::1724428944::1::::<><>::
 90_2.png::CompressedTexture2D::7237017567834751481::1716122534::1724428944::1::::<><>::
+::res://content/::1724508640
+cam.gd::GDScript::-1::1724508640::0::1::::<>Camera3D<>::
+::res://content/player/::1724508772
+movement_walk.gd::GDScript::-1::1724508501::0::1::::<>Node<>::
+player_controller.gd::GDScript::-1::1724508772::0::1::::<>RigidBody3D<>::
+player_input.gd::GDScript::-1::1724507770::0::1::::<>Node<>::
 ::res://game/::1724428817
 GameManager.gd::GDScript::-1::1724428242::0::1::::<>Node<>::
 GlobalFX.gd::GDScript::-1::1716122534::0::1::::<>Node<>::
@@ -357,11 +381,12 @@ MeleeWeapon.gd::GDScript::-1::1716122534::0::1::::<>Node<>::
 Projectile.gd::GDScript::-1::1716122534::0::1::::<>Node<>::
 projectile.tscn::PackedScene::3557213843264780684::1716122534::0::1::::<><>::res://player/weapons/Projectile.gd
 RangeWeapon.gd::GDScript::-1::1716122534::0::1::::<>Node<>::
-::res://scene/::1724428812
-_root.tscn::PackedScene::3201796983740099375::1724428812::0::1::::<><>::res://script/game_manager.gd
+::res://scene/::1724508957
+_root.tscn::PackedScene::3201796983740099375::1724508956::0::1::::<><>::res://script/game_manager.gd
 menu_start.tscn::PackedScene::4454763568586852131::1724426930::0::1::::<><>::res://script/menu_start_manager.gd
-::res://script/::1724428457
-game_manager.gd::GDScript::-1::1724428457::0::1::::<>Node<>::
+testing_player_movement.tscn::PackedScene::1837965802083040688::1724508957::0::1::::<><>::res://content/player/player_controller.gd<>res://content/player/player_input.gd<>res://content/cam.gd<>res://content/player/movement_walk.gd
+::res://script/::1724507286
+game_manager.gd::GDScript::-1::1724507286::0::1::::<>Node<>::
 menu_start_manager.gd::GDScript::-1::1724426798::0::1::::<>Control<>::
 ::res://system ai/::1716122534
 MODRangeObservePlayer.gd::GDScript::-1::1716122534::0::1::::<>Area3D<>::

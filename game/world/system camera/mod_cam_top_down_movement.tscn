@@ -1,6 +1,20 @@
 [gd_scene load_steps=2 format=3 uid="uid://cfetbcr0kkf7r"]
 
-[ext_resource type="Script" path="res://world/system camera/MODCamTopDownMovement.gd" id="1_juy0d"]
+[sub_resource type="GDScript" id="GDScript_cu0gw"]
+script/source = "extends Node
+var tween: Tween
+var camOffset = Vector3(0, 20, 8)
+
+func _process(delta):
+	tween = create_tween().set_trans(Tween.TRANS_CIRC)
+	var camMovingDirection = game.player.global_transform.origin + camOffset
+	tween.tween_property(
+		game.mainCam,
+		\"global_transform:origin\",
+		camMovingDirection,
+		0.2
+	)
+"
 
 [node name="CamTopDown" type="Node"]
-script = ExtResource("1_juy0d")
+script = SubResource("GDScript_cu0gw")

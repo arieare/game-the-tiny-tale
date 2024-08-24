@@ -1,0 +1,10 @@
+Node
+MeshInstance3D
+RigidBody3D
+RayCast3D
+WorldEnvironment
+DirectionalLight3D
+Camera3D
+StaticBody3D
+Node3D
+CollisionShape3D
