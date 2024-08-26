@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dn0vo1m3b1y3i"]
 
-[ext_resource type="Script" path="res://system dismantle/MainItemBehaviour.gd" id="1_tod56"]
+[ext_resource type="Script" path="res://game/system dismantle/MainItemBehaviour.gd" id="1_tod56"]
 
 [sub_resource type="SystemFont" id="SystemFont_slw46"]
 font_names = PackedStringArray("Input Sans")

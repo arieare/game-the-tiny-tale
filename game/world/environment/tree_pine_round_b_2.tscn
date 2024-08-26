@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://xftlh6y2rfxc"]
-
-[ext_resource type="PackedScene" uid="uid://bo8hfjdjr2pf4" path="res://art/models/Nature Kit/tree_pineRoundB.glb" id="1_spi76"]
-
-[node name="tree_pineRoundB2" instance=ExtResource("1_spi76")]
-
-[node name="tree_pineRoundB" parent="tmpParent" index="0"]
-transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 0, -0.05, 0)

@@ -1,0 +1,92 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4p6kmywhq548"]
+
+[ext_resource type="Script" path="res://ui/main_menu/main_menu.gd" id="1_hm830"]
+
+[sub_resource type="SystemFont" id="SystemFont_e185h"]
+font_names = PackedStringArray("Atkinson Hyperlegible")
+subpixel_positioning = 0
+
+[sub_resource type="Theme" id="Theme_utnof"]
+default_font = SubResource("SystemFont_e185h")
+
+[node name="menu_main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_utnof")
+script = ExtResource("1_hm830")
+start_btn_node = NodePath("marginbox/vbox/vbox/start_btn")
+credit_btn_node = NodePath("marginbox/vbox/vbox/credit_btn")
+
+[node name="bg" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="marginbox" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 48
+theme_override_constants/margin_right = 48
+theme_override_constants/margin_bottom = 48
+
+[node name="vbox" type="VBoxContainer" parent="marginbox"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/separation = 60
+
+[node name="game_title" type="Label" parent="marginbox/vbox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 120
+text = "the tiny tale
+"
+
+[node name="vbox" type="VBoxContainer" parent="marginbox/vbox"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="start_btn" type="Button" parent="marginbox/vbox/vbox"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 48
+text = "start"
+alignment = 0
+
+[node name="option_btn" type="Button" parent="marginbox/vbox/vbox"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 48
+text = "option"
+alignment = 0
+
+[node name="credit_btn" type="Button" parent="marginbox/vbox/vbox"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 48
+text = "credit"
+alignment = 0
+
+[node name="quit_btn" type="Button" parent="marginbox/vbox/vbox"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 48
+text = "quit"
+alignment = 0
+
+[node name="copyright" type="Label" parent="marginbox/vbox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "a game by jestersuitgame / @arieare"

@@ -12,9 +12,9 @@ config_version=5
 
 config/name="the tiny tale"
 config/tags=PackedStringArray("game", "wip")
-run/main_scene="res://scene/_root.tscn"
+run/main_scene="res://_root.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://Icon.png"
+config/icon="res://app/app_icon.png"
 
 [display]
 
@@ -27,7 +27,10 @@ window/stretch/mode="viewport"
 [file_customization]
 
 folder_colors={
-"res://content/": "yellow"
+"res://app/": "blue",
+"res://content/": "yellow",
+"res://game/": "red",
+"res://ui/": "green"
 }
 
 [input]
