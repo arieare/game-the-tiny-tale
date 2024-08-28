@@ -4,8 +4,8 @@ extends Node3D
 # [ ] ADD FEET PLACEMENT RAY
 
 var parent: RigidBody3D
-var WALK_SPEED:float = 16
-var ACCELERATION:float = 25
+var WALK_SPEED:float = 8
+var ACCELERATION:float = 40
 
 #Bobbing movement
 var step_magnitude:float = 45 # the bigger, the smaller step it is
@@ -36,9 +36,8 @@ func walk(direction, delta):
 	if target_acceleration.length() > ACCELERATION: 
 		target_acceleration = (target_acceleration.normalized() * ACCELERATION)
 	
-	var leaning_point: Vector3 = Vector3(0, 0.4, 0)
+	var leaning_point: Vector3 = Vector3(0, -0.6, 0)
 	
-	#parent.apply_central_force(target_acceleration * parent.mass)
 	parent.apply_force(target_acceleration * parent.mass, leaning_point)
 	
 	face_direction(direction)
@@ -59,13 +58,13 @@ func walk_bobbing(delta):
 	walk_amount = 1.0
 	walk_time += delta
 	walk_amount *= walk_decay
-	var push_down_force = sin(walk_time*walk_frequence)*walk_amplitude*walk_amount / 1.5
+	var push_down_force = sin(walk_time*walk_frequence)*walk_amplitude*walk_amount * 0
 	
 	
 	## Bob left and right
 	var push_down_cycle = sin(walk_time*walk_frequence/2)*walk_amplitude*walk_amount
 	var ik_foot_to_update = right_target
-	var bobbing_point: Vector3 = Vector3(-0.18, 0, 0)
+	var bobbing_point: Vector3 = Vector3(-0.15, 0, 0)
 	if push_down_cycle < 0:
 		bobbing_point = bobbing_point * -1
 		ik_foot_to_update = left_target
@@ -73,10 +72,10 @@ func walk_bobbing(delta):
 	
 	
 	
-	var ik_position_from_hip: Vector3 = to_global(bobbing_point + Vector3(0,0,-0.03))
+	var ik_position_from_hip: Vector3 = to_global(bobbing_point + Vector3(0,0,-0.3))
 	var new_ik_position = to_local(parent.move_levitate.ray_collision_check().col_position) + ik_position_from_hip
 	
-	var height_ik_position:Vector3 = Vector3(0,WALK_SPEED/40,0)
+	var height_ik_position:Vector3 = Vector3(0,0.2,0)
 	var half_ik_position = ik_foot_to_update.global_position.lerp(new_ik_position, 0.5) + height_ik_position
 	#ik_foot_to_update.global_position = new_ik_position
 	

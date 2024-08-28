@@ -1,7 +1,7 @@
 extends Node
 
 var parent: RigidBody3D
-var LEV_DISTANCE: float = 1.0
+var LEV_DISTANCE: float = 1.2
 var LEV_STIFFNESS: float = 400
 var LEV_DAMP: float = 10
 
