@@ -1,6 +1,6 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1724683906
-_root.tscn::PackedScene::3201796983740099375::1724683833::0::1::::<><>::res://game/game.gd
+::res://::1724775706
+_root.tscn::PackedScene::3201796983740099375::1724775706::0::1::::<><>::res://game/game.gd
 README.md::TextFile::-1::1724683247::0::1::::<><>::
 ::res://addons/::1724508903
 ::res://addons/godot-jolt/::1724508904
@@ -361,23 +361,24 @@ tree_thin_fall.glb::PackedScene::7574122352501441087::1716122534::1724683464::1:
 90_0.png::CompressedTexture2D::8725961105920272908::1716122534::1724683421::1::::<><>::
 90_1.png::CompressedTexture2D::2998968802118855264::1716122534::1724683421::1::::<><>::
 90_2.png::CompressedTexture2D::7237017567834751481::1716122534::1724683421::1::::<><>::
-::res://game/::1724683848
-game.gd::GDScript::-1::1724683833::0::1::::<>Node<>::
+::res://game/::1724767172
+game.gd::GDScript::-1::1724767172::0::1::::<>Node<>::
 GameManager.gd::GDScript::-1::1724428242::0::1::::<>Node<>::
 ::res://game/collectibles/::1716122534
 Collectible.gd::GDScript::-1::1716122534::0::1::::<>Node<>::
 soul_collectible.tscn::PackedScene::7564116873636975016::1716122534::0::1::::<><>::res://game/collectibles/Collectible.gd
 ::res://game/component/::1724682800
-::res://game/core/::1724682856
-cam.gd::GDScript::-1::1724547649::0::1::::<>Camera3D<>::
-::res://game/player/::1724681902
+::res://game/core/::1724767196
+cam.gd::GDScript::-1::1724721165::0::1::::<>Camera3D<>::
+pid_controller.gd::GDScript::-1::1724767196::0::1::::PIDController<>Node<>::
+::res://game/player/::1724775706
 _debug_ui.gd::GDScript::-1::1724681095::0::1::::<>Control<>::
-movement_jump.gd::GDScript::-1::1724518848::0::1::::<>Node<>::
-movement_levitation.gd::GDScript::-1::1724587879::0::1::::<>Node<>::
-movement_upright.gd::GDScript::-1::1724550646::0::1::::<>Node<>::
-movement_walk.gd::GDScript::-1::1724681802::0::1::::<>Node3D<>::
-player_controller.gd::GDScript::-1::1724681902::0::1::::<>RigidBody3D<>::
-player_input.gd::GDScript::-1::1724507770::0::1::::<>Node<>::
+movement_jump.gd::GDScript::-1::1724770810::0::1::::<>Node<>::
+movement_levitation.gd::GDScript::-1::1724720847::0::1::::<>Node<>::
+movement_upright.gd::GDScript::-1::1724775706::0::1::::<>Node<>::
+movement_walk.gd::GDScript::-1::1724775544::0::1::::<>Node3D<>::
+player_controller.gd::GDScript::-1::1724771439::0::1::::<>RigidBody3D<>::
+player_input.gd::GDScript::-1::1724770081::0::1::::<>Node<>::
 ::res://game/player_deprecated/::1716122534
 PlayerMovement.gd::GDScript::-1::1716122534::0::1::::<>Node<>::
 SkillManager.gd::GDScript::-1::1716122534::0::1::::<>Node<>::
@@ -388,8 +389,8 @@ MeleeWeapon.gd::GDScript::-1::1716122534::0::1::::<>Node<>::
 Projectile.gd::GDScript::-1::1716122534::0::1::::<>Node<>::
 projectile.tscn::PackedScene::3557213843264780684::1724682901::0::1::::<><>::res://game/player_deprecated/weapons/Projectile.gd
 RangeWeapon.gd::GDScript::-1::1716122534::0::1::::<>Node<>::
-::res://game/prototype/::1724683857
-testing_player_movement.tscn::PackedScene::1837965802083040688::1724683820::0::1::::<><>::res://game/core/cam.gd<>res://game/player/player_controller.gd<>res://game/player/player_input.gd<>res://game/player/movement_walk.gd<>res://game/player/movement_levitation.gd<>res://game/player/movement_upright.gd<>res://game/player/movement_jump.gd<>res://game/player/_debug_ui.gd
+::res://game/prototype/::1724775765
+testing_player_movement.tscn::PackedScene::1837965802083040688::1724775765::0::1::::<><>::res://game/core/cam.gd<>res://game/player/player_controller.gd<>res://game/player/player_input.gd<>res://game/player/movement_walk.gd<>res://game/core/pid_controller.gd<>res://game/player/movement_levitation.gd<>res://game/player/movement_upright.gd<>res://game/player/movement_jump.gd<>res://game/player/_debug_ui.gd
 ::res://game/scene/::1724683857
 world.tscn::PackedScene::7804073401603122137::1724682901::0::1::::<><>::res://game/world/WorldInit.gd<>uid://1desgh3x7s5c::::res://game/world/system camera/mod_cam_shake.tscn<>uid://cfetbcr0kkf7r::::res://game/world/system camera/mod_cam_top_down_movement.tscn<>uid://dkjifnrjbb2e2::::res://game/world/environment/campfire_logs_2.tscn<>res://game/player_deprecated/PlayerMovement.gd<>res://game/player_deprecated/SkillManager.gd<>res://game/player_deprecated/SkillShooting.gd<>res://game/player_deprecated/SkillSlashing.gd<>res://game/player_deprecated/weapons/RangeWeapon.gd<>uid://bqxe1645pw8ku::::res://game/player_deprecated/weapons/projectile.tscn<>res://game/player_deprecated/weapons/MeleeWeapon.gd<>uid://df1d5ue4b8yps::::res://game/collectibles/soul_collectible.tscn<>res://game/system ai/MODRangeObservePlayer.gd
 ::res://game/system ai/::1724682514
@@ -409,13 +410,13 @@ WorldInit.gd::GDScript::-1::1716122534::0::1::::<>Node<>::
 campfire_logs_2.tscn::PackedScene::7880225261633373959::1716122534::0::1::::<><>::
 mushroom_red_2.tscn::PackedScene::5060882266257649760::1724683420::0::1::::<><>::uid://cu0i3hlegyvoj::::res://content/art/model/Nature Kit/mushroom_red.glb
 tree_pine_round_b_2.tscn::PackedScene::1625838975720154268::1724683420::0::1::::<><>::uid://bo8hfjdjr2pf4::::res://content/art/model/Nature Kit/tree_pineRoundB.glb
-::res://game/world/system camera/::1724683820
+::res://game/world/system camera/::1724775707
 MODCamShake.gd::GDScript::-1::1716122534::0::1::::<>Node<>::
 mod_cam_shake.tscn::PackedScene::1831378407370314230::1724682693::0::1::::<><>::res://game/world/system camera/MODCamShake.gd
-mod_cam_top_down_movement.tscn::PackedScene::5133198637707095093::1724683820::0::1::::<><>::
+mod_cam_top_down_movement.tscn::PackedScene::5133198637707095093::1724775707::0::1::::<><>::
 ::res://ui/::1724683899
 SoulLabel.gd::GDScript::-1::1716122534::0::1::::<>Label<>::
 ui_item_showcase.tscn::PackedScene::8124627905607318400::1724682517::0::1::::<><>::res://game/system dismantle/MainItemBehaviour.gd
-::res://ui/main_menu/::1724683906
-main_menu.gd::GDScript::-1::1724426798::0::1::::<>Control<>::
-menu_main.tscn::PackedScene::4454763568586852131::1724683906::0::1::::<><>::res://ui/main_menu/main_menu.gd
+::res://ui/main_menu/::1724775707
+main_menu.gd::GDScript::-1::1724684040::0::1::::<>Control<>::
+main_menu.tscn::PackedScene::4454763568586852131::1724775707::0::1::::<><>::res://ui/main_menu/main_menu.gd

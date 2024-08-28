@@ -1,8 +1,8 @@
+MeshInstance3D
 Node
 VBoxContainer
 CheckBox
 Control
-MeshInstance3D
 Node3D
 SkeletonIK3D
 PhysicalBoneSimulator3D

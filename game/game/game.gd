@@ -1,8 +1,8 @@
 extends Node
 
 ## Global variable
-enum game_state{PAUSE, OVER, PLAYING}
-var current_game_state = game_state.PAUSE
+enum GAME_STATE{PAUSE, OVER, PLAYING}
+var current_game_state = GAME_STATE.PAUSE
 var game_time:float = 0.0
 
 ## List of signal

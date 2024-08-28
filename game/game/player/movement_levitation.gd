@@ -14,16 +14,17 @@ var is_on_floor: bool = false
 var floor_normal: Vector3 = Vector3.UP
 var floor_slope: float = 0.0
 var max_floor_angle: float = 46
+	
 
 func assert_parent(parent_node: RigidBody3D):
 	parent = parent_node
 
 func levitate(delta):
-	parent.ray_node.force_raycast_update()
+	parent.ray.force_raycast_update()
 	floor_check()
 	
 	if !ray_collision_check().is_colliding:
-		parent.ray_node.target_position.y = -LEV_DISTANCE
+		parent.ray.target_position.y = -LEV_DISTANCE
 		return
 	
 	var relative_y_velocity: float = parent.linear_velocity.y - ray_collision_check().col_body_velocity.y
@@ -31,7 +32,7 @@ func levitate(delta):
 	snap_distance_multiplier_b = clamp(snap_distance_multiplier_b, 0, 1)
 	var final_snap_distance: float = snap_distance - snap_distance * snap_distance_multiplier_b
 	
-	parent.ray_node.target_position.y = -LEV_DISTANCE - final_snap_distance
+	parent.ray.target_position.y = -LEV_DISTANCE - final_snap_distance
 	
 	#Levitation spring
 	var offset: float = ray_collision_check().col_distance - LEV_DISTANCE
@@ -92,13 +93,13 @@ func ray_collision_check()->Dictionary:
 	var col_body = null
 	var col_body_velocity: Vector3 = Vector3.ZERO
 
-	if parent.ray_node.is_colliding():
+	if parent.ray.is_colliding():
 		is_colliding = true
-		col_position = parent.ray_node.get_collision_point()
+		col_position = parent.ray.get_collision_point()
 		col_distance = parent.global_position.distance_to(col_position)
-		col_normal = parent.ray_node.get_collision_normal()
+		col_normal = parent.ray.get_collision_normal()
 		col_slope =  rad_to_deg(acos(col_normal.dot(Vector3.UP)))
-		col_body = parent.ray_node.get_collider()
+		col_body = parent.ray.get_collider()
 
 		if col_body is RigidBody3D:
 			col_body_velocity = parent.get_velocity_at_position(col_body, col_position)

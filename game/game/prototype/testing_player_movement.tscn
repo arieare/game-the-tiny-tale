@@ -2,8 +2,10 @@
 
 [ext_resource type="Script" path="res://game/core/cam.gd" id="1_in2s7"]
 [ext_resource type="Script" path="res://game/player/player_controller.gd" id="2_tgcd4"]
+[ext_resource type="Shader" path="res://content/shader/glass.gdshader" id="3_ah6qf"]
 [ext_resource type="Script" path="res://game/player/player_input.gd" id="3_kfsrx"]
 [ext_resource type="Script" path="res://game/player/movement_walk.gd" id="4_4pdua"]
+[ext_resource type="Script" path="res://game/core/pid_controller.gd" id="4_n7cmn"]
 [ext_resource type="Script" path="res://game/player/movement_levitation.gd" id="5_7vspc"]
 [ext_resource type="Script" path="res://game/player/movement_upright.gd" id="6_hypgq"]
 [ext_resource type="Script" path="res://game/player/movement_jump.gd" id="7_n2w1q"]
@@ -14,10 +16,10 @@ radius = 0.25
 height = 0.75
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x7qyu"]
-albedo_color = Color(1, 0, 0, 1)
-roughness = 0.0
-emission_enabled = true
+albedo_color = Color(0, 0, 0, 1)
+roughness = 0.75
 emission = Color(0.988235, 0, 0, 1)
+emission_energy_multiplier = 0.5
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_7wdxb"]
 material = SubResource("StandardMaterial3D_x7qyu")
@@ -29,39 +31,35 @@ material = SubResource("StandardMaterial3D_x7qyu")
 radius = 0.25
 height = 0.5
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s3sgc"]
-albedo_color = Color(1, 0, 0, 1)
-roughness = 0.0
-emission_enabled = true
-emission = Color(0.988235, 0, 0, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_varbj"]
+render_priority = 0
+shader = ExtResource("3_ah6qf")
+shader_parameter/albedo = Color(1, 1, 1, 0.305882)
+shader_parameter/roughness = 0.31
+shader_parameter/normal_strength = 5.289
+shader_parameter/edge_color = Color(0.0660974, 2.91417e-08, 5.2643e-09, 1)
 
-[sub_resource type="PrismMesh" id="PrismMesh_lq4mw"]
-material = SubResource("StandardMaterial3D_s3sgc")
-size = Vector3(0.3, 0.2, 0.25)
+[sub_resource type="SphereMesh" id="SphereMesh_gtdsx"]
+material = SubResource("ShaderMaterial_varbj")
+radius = 0.4
+height = 0.8
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3u18h"]
-albedo_color = Color(1, 0, 1, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dywql"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_g3esv"]
-material = SubResource("StandardMaterial3D_3u18h")
-size = Vector3(0.2, 0.1, 0.2)
+[sub_resource type="SphereMesh" id="SphereMesh_s7g5y"]
+material = SubResource("StandardMaterial3D_dywql")
+radius = 0.2
+height = 0.4
 
-[sub_resource type="PrismMesh" id="PrismMesh_73yxx"]
-material = SubResource("StandardMaterial3D_3u18h")
-left_to_right = 0.0
-size = Vector3(0.2, 0.1, 0.2)
+[sub_resource type="SphereMesh" id="SphereMesh_c13wn"]
+material = SubResource("StandardMaterial3D_x7qyu")
+radius = 0.15
+height = 0.3
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nswd1"]
-albedo_color = Color(0, 1, 1, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_qcktq"]
-material = SubResource("StandardMaterial3D_nswd1")
-size = Vector3(0.2, 0.1, 0.2)
-
-[sub_resource type="PrismMesh" id="PrismMesh_psmf0"]
-material = SubResource("StandardMaterial3D_nswd1")
-left_to_right = 0.0
-size = Vector3(0.2, 0.1, 0.2)
+[sub_resource type="SphereMesh" id="SphereMesh_2t6u4"]
+material = SubResource("StandardMaterial3D_x7qyu")
+radius = 0.15
+height = 0.3
 
 [sub_resource type="BoxMesh" id="BoxMesh_dejda"]
 size = Vector3(800, 1, 800)
@@ -94,16 +92,19 @@ volumetric_fog_enabled = true
 [node name="root" type="Node3D"]
 
 [node name="cam" type="Camera3D" parent="." node_paths=PackedStringArray("follow_target")]
-transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.866026, 0.5, 0, -0.5, 0.866026, 0, 0, 0)
 script = ExtResource("1_in2s7")
 follow_target = NodePath("../player")
 
 [node name="player" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.50459, 0)
-gravity_scale = 2.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.29295, 0)
+disable_mode = 2
 script = ExtResource("2_tgcd4")
+ray_node = NodePath("ray")
 move_walk_node = NodePath("movement/walk")
 move_levitate_node = NodePath("movement/levitation")
+move_upright_node = NodePath("movement/upright")
+move_jump_node = NodePath("movement/jump")
 
 [node name="collider" type="CollisionShape3D" parent="player"]
 shape = SubResource("CapsuleShape3D_i1yth")
@@ -119,12 +120,26 @@ mesh = SubResource("CapsuleMesh_7wdxb")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.598597, 0)
 mesh = SubResource("SphereMesh_d8rtc")
 
+[node name="helmet" type="MeshInstance3D" parent="player/body/head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0430532, 0)
+mesh = SubResource("SphereMesh_gtdsx")
+
 [node name="face" type="MeshInstance3D" parent="player/body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.60226, -0.243894)
-mesh = SubResource("PrismMesh_lq4mw")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.588226, -0.11743)
+mesh = SubResource("SphereMesh_s7g5y")
 
 [node name="hip" type="Node3D" parent="player/body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.181797, 0)
+
+[node name="foot_ik_target" type="Node" parent="player/body"]
+
+[node name="left_target" type="MeshInstance3D" parent="player/body/foot_ik_target"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.351133, 0.733488, 0)
+mesh = SubResource("SphereMesh_c13wn")
+
+[node name="right_target" type="MeshInstance3D" parent="player/body/foot_ik_target"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.733488, 0)
+mesh = SubResource("SphereMesh_2t6u4")
 
 [node name="controller" type="Node" parent="player"]
 
@@ -135,34 +150,21 @@ script = ExtResource("3_kfsrx")
 
 [node name="walk" type="Node3D" parent="player/movement"]
 script = ExtResource("4_4pdua")
+left_target_node = NodePath("../../body/foot_ik_target/left_target")
+right_target_node = NodePath("../../body/foot_ik_target/right_target")
 
 [node name="levitation" type="Node" parent="player/movement"]
 script = ExtResource("5_7vspc")
 
 [node name="upright" type="Node" parent="player/movement"]
 script = ExtResource("6_hypgq")
+pid_controller_node = NodePath("pid_controller")
+
+[node name="pid_controller" type="Node" parent="player/movement/upright"]
+script = ExtResource("4_n7cmn")
 
 [node name="jump" type="Node" parent="player/movement"]
 script = ExtResource("7_n2w1q")
-
-[node name="ik_target" type="Node" parent="player"]
-
-[node name="left_target" type="MeshInstance3D" parent="player/ik_target"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.351133, 0.733488, 0)
-mesh = SubResource("BoxMesh_g3esv")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="player/ik_target/left_target"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.15379, 0)
-mesh = SubResource("PrismMesh_73yxx")
-
-[node name="right_target" type="MeshInstance3D" parent="player/ik_target"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.733488, 0)
-mesh = SubResource("BoxMesh_qcktq")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="player/ik_target/right_target"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.153894, 0)
-mesh = SubResource("PrismMesh_psmf0")
-skeleton = NodePath("../../left_target")
 
 [node name="ground" type="StaticBody3D" parent="."]
 

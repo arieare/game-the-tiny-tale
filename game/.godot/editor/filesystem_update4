@@ -18,3 +18,12 @@ res://ui/main_menu/menu_main.tscn
 res://game/prototype/testing_player_movement.tscn
 res://ui/main_menu/main_menu.tscn
 res://ui/main_menu/main_menu.gd
+res://game/player/player_controller.gd
+res://game/player/movement_levitation.gd
+res://game/core/cam.gd
+res://game/core/pid_controller.gd
+res://game/player/movement_upright.gd
+res://game/player/movement_walk.gd
+res://game/player/player_input.gd
+res://game/player/movement_jump.gd
+res://content/shader/glass.gdshader

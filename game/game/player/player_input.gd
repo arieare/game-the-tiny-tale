@@ -2,7 +2,9 @@ extends Node
 
 @export var parent: RigidBody3D
 
-func get_input():
+var is_jumping_pressed: bool = false
+
+func get_direction():
 	var input: Vector2 = Input.get_vector(
 		"move_left",
 		"move_right",
