@@ -1,8 +1,8 @@
 extends Node3D
 
 var parent: RigidBody3D
-var WALK_SPEED:float = 8
-var ACCELERATION:float = 100
+var WALK_SPEED:float = 17
+var ACCELERATION:float = 54
 
 @export var vfx_running_dust_node: NodePath
 @onready var vfx_running_dust:GPUParticles3D = get_node(vfx_running_dust_node)
@@ -21,7 +21,7 @@ func walk(direction, delta):
 	if target_acceleration.length() > ACCELERATION: 
 		target_acceleration = (target_acceleration.normalized() * ACCELERATION)
 	
-	var leaning_point: Vector3 = Vector3(0, 0, 0)
+	var leaning_point: Vector3 = Vector3(0, -0.75, 0)
 	parent.apply_force(target_acceleration * parent.mass, leaning_point)
 	
 	if direction:

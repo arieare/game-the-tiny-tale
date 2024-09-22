@@ -7,9 +7,9 @@ var max_roll = 0.1  # Maximum rotation in radians (use sparingly)
 var trauma = 0.0  # Current shake strength.
 var trauma_power = 2  # Trauma exponent. Use [2, 3].
 var noise_y = 0
-var parent: Camera3D
+var parent: Node3D
 
-func assert_parent(parent_node: Camera3D):
+func assert_parent(parent_node: Node3D):
 	parent = parent_node
 
 func add_trauma(amount):

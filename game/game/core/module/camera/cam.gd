@@ -1,41 +1,41 @@
-extends Camera3D
+extends Node3D
 
 ## List of node
 @onready var root = get_tree().get_root().get_child(0)
+@export var scene_root: Node3D
+@export var shake:Node
+@export var pixel_outline:Node
+@export var follow_cam:Node
 @export var follow_target: Node
 
-@export var shake_node: NodePath
-@onready var shake:Node = get_node(shake_node)
-
-@export var pixel_outline_node: NodePath
-@onready var pixel_outline:Node = get_node(pixel_outline_node)
-
 var offset_y: float = 10.0
-var offset_z: float = 13.0
-var tween: Tween
+var offset_z: float = 12.0
+
 var cam_offset = Vector3(0, offset_y, offset_z)
-var cam_rotation = -20
+var cam_rotation = -10
+
+@onready var cam_child:Camera3D = self.get_child(0)
 
 func _ready() -> void:
-	shake.assert_parent(self)
-	pixel_outline.assert_parent(self)
+	shake.assert_parent(cam_child)
+	pixel_outline.assert_parent(cam_child)
+	follow_cam.assert_parent(cam_child)
 	register_self_to_root()
-	self.global_position = cam_offset
-	self.rotation.x = deg_to_rad(cam_rotation)
+	cam_child.fov = 80
+	cam_child.position = cam_offset
+	cam_child.rotation.x = deg_to_rad(cam_rotation)
 
 func _process(delta):
 	shake.trauma_shake(delta)
-	follow_cam(follow_target)
+	follow_cam.follow_cam(follow_target, cam_offset)
+	rotate_cam()
+
 
 func register_self_to_root():
 	root.cam = self
 
-func follow_cam(target):
-	tween = create_tween().set_trans(Tween.TRANS_CIRC)
-	var cam_direction = Vector3(target.global_transform.origin.x + cam_offset.x,follow_target.global_transform.origin.y + cam_offset.y, follow_target.global_transform.origin.z + cam_offset.z)
-	tween.tween_property(
-		self,
-		"global_transform:origin",
-		cam_direction,
-		0.075
-	)	
+func rotate_cam():
+	if Input.is_action_pressed("cam_rotate_left"):
+		self.rotation_degrees.y += 1.0 
+	elif Input.is_action_pressed("cam_rotate_right"):
+		self.rotation_degrees.y -= 1.0 

@@ -5,7 +5,7 @@ class_name InteractionAreaModule
 @onready var root = get_tree().get_root().get_child(0)
 @export var interaction_name: String = "interact"
 
-@onready var collision:CollisionShape3D = self.get_child(0)
+@export var collision:CollisionShape3D
 
 var interact: Callable = func():
 	pass

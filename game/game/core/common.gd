@@ -6,24 +6,17 @@ var mouse: Vector2
 var ray_query = PhysicsRayQueryParameters3D.new()
 var ray_length = 100.0
 
-@export var pid_controller_node:NodePath
-@onready var pid_controller = get_node(pid_controller_node)
-
-@export var day_time_node:NodePath
-@onready var day_time = get_node(day_time_node)
-
-@export var input_setting_node:NodePath
-@onready var input_setting = get_node(input_setting_node)
-
-@export var interaction_manager_node:NodePath
-@onready var interaction_manager = get_node(interaction_manager_node)
+@export var pid_controller: Node
+@export var day_time: Node
+@export var input_setting: Node
+@export var interaction_manager: Node3D
 
 func ray_cast_from_mouse():
 	mouse = get_tree().get_root().get_viewport().get_mouse_position()
-	ray_query.from = root.cam.project_ray_origin(mouse)
-	ray_query.to = ray_query.from + root.cam.project_ray_normal(mouse) * ray_length
+	ray_query.from = root.cam.cam_child.project_ray_origin(mouse)
+	ray_query.to = ray_query.from + root.cam.cam_child.project_ray_normal(mouse) * ray_length
 	ray_query.collide_with_areas = false
-	return root.cam.get_world_3d().direct_space_state.intersect_ray(ray_query)
+	return root.cam.cam_child.get_world_3d().direct_space_state.intersect_ray(ray_query)
 
 #func GetChildNodeWithType(parentNode:Node, nodeType) -> Array:
 	#var type

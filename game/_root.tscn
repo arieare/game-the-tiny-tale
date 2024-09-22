@@ -8,31 +8,32 @@
 [ext_resource type="Script" path="res://game/core/input_setting.gd" id="5_ccuo1"]
 [ext_resource type="PackedScene" uid="uid://brj8m71cptbtw" path="res://game/core/module/interaction/interaction_manager.tscn" id="6_ytl1l"]
 
-[node name="root" type="Node"]
+[node name="root" type="Node" node_paths=PackedStringArray("game_instance", "app_instance", "ui_instance", "common")]
 script = ExtResource("1_owfvw")
-game_instance_node = NodePath("game")
-app_instance_node = NodePath("app")
-ui_instance_node = NodePath("ui")
-common_node = NodePath("common")
+game_instance = NodePath("game")
+app_instance = NodePath("app")
+ui_instance = NodePath("ui")
+common = NodePath("common")
 
 [node name="app" type="Node" parent="."]
 script = ExtResource("2_prex2")
 
 [node name="game" type="Node" parent="."]
 
-[node name="common" type="Node" parent="."]
+[node name="common" type="Node" parent="." node_paths=PackedStringArray("pid_controller", "day_time", "input_setting", "interaction_manager")]
 script = ExtResource("2_3rpfv")
-pid_controller_node = NodePath("pid_controller")
-day_time_node = NodePath("day_time_system")
-input_setting_node = NodePath("input_setting")
-interaction_manager_node = NodePath("interaction_manager")
+pid_controller = NodePath("pid_controller")
+day_time = NodePath("day_time_system")
+input_setting = NodePath("input_setting")
+interaction_manager = NodePath("interaction_manager")
 
 [node name="pid_controller" type="Node" parent="common"]
 script = ExtResource("2_bbwe3")
 
 [node name="day_time_system" type="Node" parent="common"]
 script = ExtResource("4_tavwi")
-hour = 22
+hour = 16
+tick_per_second = 200
 
 [node name="input_setting" type="Node" parent="common"]
 script = ExtResource("5_ccuo1")

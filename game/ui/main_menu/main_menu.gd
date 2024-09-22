@@ -1,11 +1,9 @@
 extends Control
 
 @onready var root = get_tree().get_root().get_child(0)
-@export var start_btn_node: NodePath
-@onready var start_btn = get_node(start_btn_node)
-@export var credit_btn_node: NodePath
-@onready var credit_btn = get_node(credit_btn_node)
-@onready var quit_btn = $marginbox/vbox/vbox/quit_btn
+@export var start_btn: Button
+@export var credit_btn: Button
+@export var quit_btn: Button
 
 func _ready() -> void:
 	start_btn.grab_focus()

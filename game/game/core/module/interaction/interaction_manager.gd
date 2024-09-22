@@ -2,9 +2,7 @@ extends Node3D
 
 ## List of game node
 @onready var root = get_tree().get_root().get_child(0)
-
-@export var interaction_label_node:NodePath
-@onready var interaction_label = get_node(interaction_label_node)
+@export var interaction_label: Label3D
 
 const BASE_INSTRUCTION_TEXT: String = "[E] to "
 

@@ -54,3 +54,15 @@ func input_setting():
 	InputMap.add_action("attack")
 	InputMap.action_add_event("attack", event_left_click)
 	#endregion
+	
+	#region camera input
+	var event_arrow_left := InputEventKey.new()
+	event_arrow_left.physical_keycode = KEY_LEFT
+	InputMap.add_action("cam_rotate_left")
+	InputMap.action_add_event("cam_rotate_left", event_arrow_left)		
+
+	var event_arrow_right := InputEventKey.new()
+	event_arrow_right.physical_keycode = KEY_RIGHT
+	InputMap.add_action("cam_rotate_right")
+	InputMap.action_add_event("cam_rotate_right", event_arrow_right)
+	#endregion

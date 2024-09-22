@@ -7,7 +7,7 @@ extends Node
 @export_range(0,24) var hour: int = 0
 @export_range(0,59) var day: int = 0
 
-var tick_per_second:int = 60.0
+@export var tick_per_second:int = 60.0
 var delta_time: float = 0.0
 var hour_float:float = 0.0
 

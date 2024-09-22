@@ -6,7 +6,7 @@
 [sub_resource type="Theme" id="Theme_utnof"]
 default_font = ExtResource("1_5eqlk")
 
-[node name="menu_main" type="Control"]
+[node name="menu_main" type="Control" node_paths=PackedStringArray("start_btn", "credit_btn", "quit_btn")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,8 +15,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_utnof")
 script = ExtResource("1_hm830")
-start_btn_node = NodePath("marginbox/vbox/vbox/start_btn")
-credit_btn_node = NodePath("marginbox/vbox/vbox/credit_btn")
+start_btn = NodePath("marginbox/vbox/vbox/start_btn")
+credit_btn = NodePath("marginbox/vbox/vbox/credit_btn")
+quit_btn = NodePath("marginbox/vbox/vbox/quit_btn")
 
 [node name="bg" type="ColorRect" parent="."]
 layout_mode = 1

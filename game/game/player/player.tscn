@@ -107,6 +107,8 @@ size = Vector3(0.2, 0.2, 0.2)
 [node name="player" type="RigidBody3D" groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 collision_layer = 2
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, -0.8, 0)
 freeze_mode = 1
 script = ExtResource("1_wrxx6")
 player_input_node = NodePath("controller/input")
@@ -128,9 +130,9 @@ shape = SubResource("CapsuleShape3D_i1yth")
 
 [node name="movement" type="Node3D" parent="."]
 
-[node name="lookat" type="Node3D" parent="movement"]
+[node name="lookat" type="Node3D" parent="movement" node_paths=PackedStringArray("look_aim")]
 script = ExtResource("8_dkbsy")
-look_aim_node = NodePath("../../controller/look_at_cursor/pointer")
+look_aim = NodePath("../../controller/look_at_cursor/pointer")
 
 [node name="levitation" type="Node" parent="movement"]
 script = ExtResource("4_msgk3")

@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://game/core/module/interaction/interaction_manager.gd" id="1_ky0g4"]
 
-[node name="interaction_manager" type="Node3D"]
+[node name="interaction_manager" type="Node3D" node_paths=PackedStringArray("interaction_label")]
 script = ExtResource("1_ky0g4")
-interaction_label_node = NodePath("layer/interaction_label")
+interaction_label = NodePath("layer/interaction_label")
 
 [node name="layer" type="CanvasLayer" parent="."]
 layer = 99

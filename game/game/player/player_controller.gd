@@ -58,15 +58,49 @@ func _physics_process(delta: float) -> void:
 	
 	if move_levitate: move_levitate.levitate(delta)
 	
-	if move_walk: move_walk.walk(player_input.get_direction(), delta)
+	
+	var direction
+	
+	#if root.cam:
+	direction = (root.cam.global_basis * player_input.get_direction()).normalized()
+	#direction = -direction	
+	#else:
+		#direction = player_input.get_direction()
+	
+	if move_walk: move_walk.walk(direction, delta)
+	
 		
 	if move_jump: move_jump.jump(player_input.get_jump_button(), delta)	
 	move_jump.fall(delta)	
 	
-	if player_input.get_direction() == Vector3.ZERO or self.angular_velocity.x > 50 or self.angular_velocity.x < -50 or self.angular_velocity.y > 50 or self.angular_velocity.y < -50 or self.angular_velocity.z > 50 or self.angular_velocity.z < -50:
+	if player_input.get_direction() == Vector3.ZERO or self.angular_velocity.x > 15 or self.angular_velocity.x < -15 or self.angular_velocity.y > 5 or self.angular_velocity.y < -5 or self.angular_velocity.z > 15 or self.angular_velocity.z < -15:
 		if move_upright :move_upright.maintain_upright(delta)
 	else:
+		#if move_upright :move_upright.maintain_upright(delta)
 		if move_bobbing :move_bobbing.walk_bobbing(delta)
+
+
+## With top down camera facing direction
+#
+#
+	## Get the input direction and handle the movement/deceleration.
+	## As good practice, you should replace UI actions with custom gameplay actions.
+	#var input_dir = Input.get_vector("moveLeft", "moveRight", "moveUp", "moveDown")
+	#var direction
+	#
+	#if game.mainCam:
+		#direction = (Vector3(-1,-1,-1) * game.mainCam.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+		#direction = -direction
+	#else:
+		#direction = (game.player.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	#if direction:
+		#game.player.velocity.x = direction.x * SPEED
+		#game.player.velocity.z = direction.z * SPEED
+		##game.player.rotation.y = atan2(-game.player.velocity.x, -game.player.velocity.z)
+	#else:
+		#game.player.velocity.x = move_toward(game.player.velocity.x, 0, SPEED)
+		#game.player.velocity.z = move_toward(game.player.velocity.z, 0, SPEED)
+#
 
 
 ### FX

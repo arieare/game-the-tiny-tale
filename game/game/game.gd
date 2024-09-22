@@ -3,17 +3,11 @@ extends Node
 ## List of game node
 @onready var root = get_tree().get_root().get_child(0)
 
-@export var game_instance_node:NodePath
-@onready var game_instance = get_node(game_instance_node)
-
-@export var app_instance_node:NodePath
-@onready var app_instance = get_node(app_instance_node)
-
-@export var ui_instance_node:NodePath
-@onready var ui_instance = get_node(ui_instance_node)
-
-@export var common_node:NodePath
-@onready var common = get_node(common_node)
+## Singletons
+@export var game_instance:Node
+@export var app_instance:Node
+@export var ui_instance: Node
+@export var common: Node
 
 ## UI Nodes
 @onready var ui_node: Dictionary = {
@@ -52,7 +46,7 @@ func _on_fragment_collected(value):
 #endregion
 
 ## List of game variable
-var cam: Camera3D
+var cam: Node3D
 var world: Node3D
 var light: DirectionalLight3D
 var player: RigidBody3D

@@ -1,5 +1,9 @@
 # the tiny tale
 
+## TODO
+- [ ] dialog system
+- [ ] hitbox
+
 ## project folder
 - app
 - content: hold all the assets
@@ -7,7 +11,7 @@
 - ui: hold all ui related scenes and code
 
 ## game structure
-- root
+|_ root
 |_ app
 |_ game
 |_ common
