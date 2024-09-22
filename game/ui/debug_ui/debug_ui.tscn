@@ -1,0 +1,74 @@
+[gd_scene load_steps=4 format=3 uid="uid://b36g6rofkhosy"]
+
+[ext_resource type="Script" path="res://ui/debug_ui/debug_ui.gd" id="1_5qh6y"]
+[ext_resource type="FontFile" uid="uid://w3076qvrbys5" path="res://content/font/DepartureMono-Regular.otf" id="1_uuxy0"]
+
+[sub_resource type="Theme" id="Theme_nplme"]
+default_font = ExtResource("1_uuxy0")
+default_font_size = 24
+
+[node name="ui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_nplme")
+script = ExtResource("1_5qh6y")
+fragment_label_node = NodePath("MarginContainer/vbox/fragment_label")
+game_time_label_node = NodePath("MarginContainer/vbox/game_time_label")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="vbox" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="title" type="Label" parent="MarginContainer/vbox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "the tiny tale"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="game_time_label" type="Label" parent="MarginContainer/vbox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "00:00:00"
+horizontal_alignment = 1
+
+[node name="check_float" type="CheckBox" parent="MarginContainer/vbox"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "float body
+"
+
+[node name="check_bobbing_walk" type="CheckBox" parent="MarginContainer/vbox"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "bobbing walk"
+
+[node name="check_feet" type="CheckBox" parent="MarginContainer/vbox"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "feet placement"
+
+[node name="fragment_label" type="Label" parent="MarginContainer/vbox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "◉ × 0"
+horizontal_alignment = 1

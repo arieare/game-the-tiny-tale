@@ -1,2 +1,16 @@
-res://content/shader
+res://content/material/
+res://content/texture
+res://content/terrain
+res://addons
+res://game/enemy
+res://game/prototype
+res://game
 res://game/core
+res://content/shader
+res://game/player/movement
+res://content/vfx
+res://game/player
+res://content/sfx
+res://ui/debug_ui
+res://game/player/weapons
+res://game/car

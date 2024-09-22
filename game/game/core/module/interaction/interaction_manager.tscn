@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://brj8m71cptbtw"]
+
+[ext_resource type="Script" path="res://game/core/module/interaction/interaction_manager.gd" id="1_ky0g4"]
+
+[node name="interaction_manager" type="Node3D"]
+script = ExtResource("1_ky0g4")
+interaction_label_node = NodePath("layer/interaction_label")
+
+[node name="layer" type="CanvasLayer" parent="."]
+layer = 99
+follow_viewport_enabled = true
+
+[node name="interaction_label" type="Label3D" parent="layer"]
+top_level = true
+sorting_offset = 99.0
+billboard = 1
+texture_filter = 2
+text = "[E] to interact"
+font_size = 160
+outline_size = 24
