@@ -21,3 +21,4 @@ res://game/car/car.tscn
 res://content/shader/pixel_outline.gdshader
 res://content/shader/pixel_dither.gdshader
 res://content/material/scanline.tres
+res://README.md
