@@ -10,7 +10,7 @@ extends Node3D
 @onready var cam_follow:Cam = CamFollowTarget.new()
 @onready var cam_filter:Cam = CamFilterDither.new()
 @onready var cam_free_look:Cam = CamFreeLook.new()
-@export var follow_target: Node
+#@export var follow_target: Node
 
 func init_modules():
 	cam_shake.assert_cam_parent(self)
@@ -43,5 +43,6 @@ func _ready() -> void:
 
 func _process(delta):
 	if cam_shake: cam_shake.trauma_shake(delta)
-	if cam_follow: cam_follow.follow_cam(follow_target, cam_offset)
+	if cam_follow: 
+		if root.cam_target: cam_follow.follow_cam(root.cam_target, cam_offset)
 	if cam_free_look: cam_free_look.rotate_cam()

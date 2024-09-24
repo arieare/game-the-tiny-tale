@@ -21,3 +21,9 @@ res://game/core/common/mouse_ray_cast_module.gd
 res://game/player/movement/movement_look_at.gd
 res://game/player/player_controller.gd
 res://ui/showcase_ui/showcase_ui.tscn
+res://game/car/car_controller.gd
+res://game/car/wheel.tscn
+res://game/car/car.tscn
+res://game/core/camera/cam_free_look_module.gd
+res://game/enemy/enemy.gd
+res://game/game.gd

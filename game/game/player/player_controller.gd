@@ -50,6 +50,7 @@ func _ready() -> void:
 
 func register_self_to_root():
 	root.player = self
+	root.cam_target = self
 
 func _physics_process(delta: float) -> void:
 	if move_look_at: move_look_at.look_at_target()
@@ -58,26 +59,23 @@ func _physics_process(delta: float) -> void:
 	
 	if move_levitate: move_levitate.levitate(delta)
 	
-	
-	var direction
-	
-	#if root.cam:
-	direction = (root.cam.global_basis * player_input.get_direction()).normalized()
-	#direction = -direction	
-	#else:
-		#direction = player_input.get_direction()
-	
-	if move_walk: move_walk.walk(direction, delta)
-	
-		
-	if move_jump: move_jump.jump(player_input.get_jump_button(), delta)	
-	move_jump.fall(delta)	
-	
-	if player_input.get_direction() == Vector3.ZERO or self.angular_velocity.x > 15 or self.angular_velocity.x < -15 or self.angular_velocity.y > 5 or self.angular_velocity.y < -5 or self.angular_velocity.z > 15 or self.angular_velocity.z < -15:
-		if move_upright :move_upright.maintain_upright(delta)
-	else:
-		#if move_upright :move_upright.maintain_upright(delta)
-		if move_bobbing :move_bobbing.walk_bobbing(delta)
+	match root.current_drive_state:
+		root.DRIVE_STATE.PARK:
+			var direction
+			
+			direction = (root.cam.global_basis * player_input.get_direction()).normalized()
+			
+			if move_walk: move_walk.walk(direction, delta)
+			
+				
+			if move_jump: move_jump.jump(player_input.get_jump_button(), delta)	
+			move_jump.fall(delta)	
+			
+			if player_input.get_direction() == Vector3.ZERO or self.angular_velocity.x > 15 or self.angular_velocity.x < -15 or self.angular_velocity.y > 5 or self.angular_velocity.y < -5 or self.angular_velocity.z > 15 or self.angular_velocity.z < -15:
+				if move_upright :move_upright.maintain_upright(delta)
+			else:
+				#if move_upright :move_upright.maintain_upright(delta)
+				if move_bobbing :move_bobbing.walk_bobbing(delta)
 
 
 ### FX

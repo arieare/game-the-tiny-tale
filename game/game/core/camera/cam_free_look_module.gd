@@ -1,7 +1,7 @@
 extends Cam
 class_name CamFreeLook
 
-var free_look_speed_degree: float = 5.0
+var free_look_speed_degree: float = 1.0
 
 func rotate_cam():
 	if Input.is_action_pressed("cam_rotate_left"):

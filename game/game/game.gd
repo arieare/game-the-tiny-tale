@@ -1,5 +1,13 @@
 extends Node
 
+## List of game variable
+@onready var player: RigidBody3D
+@onready var cam: Node3D
+@onready var cam_target = null
+@onready var world: Node3D
+@onready var light: DirectionalLight3D
+@onready var car: RigidBody3D
+
 ## List of game node
 @onready var root = get_tree().get_root().get_child(0)
 
@@ -22,9 +30,11 @@ extends Node
 signal change_scene
 signal scene_ready
 signal game_state(current_state, previous_state)
+signal car_drive_state(current_state, previous_state)
 signal play_state(current_state, previous_state)
 signal fragment_collected(new_value)
 #endregion
+
 #region signal callback
 func _on_scene_change(_parent, _from, _to):
 	var children_size = _parent.get_child_count()
@@ -43,14 +53,11 @@ func _on_game_state_change(new_state:GAME_STATE):
 
 func _on_fragment_collected(value):
 	game_var.fragment_collected += value
+
+func _on_car_drive_state_change(new_state:DRIVE_STATE):
+	current_drive_state = new_state
 #endregion
 
-## List of game variable
-var cam: Node3D
-var world: Node3D
-var light: DirectionalLight3D
-var player: RigidBody3D
-#var cursor
 
 var game_var: Dictionary = {
 	"player_position": Vector3.ZERO,
@@ -72,12 +79,14 @@ func _ready() -> void:
 func game_setup():
 	ui_instance.add_child(ui_node.main_menu.instantiate())
 	game_instance.call_deferred("add_child",game_node.prototype.instantiate())
+	
 
 func connect_root_signals():
 	self.connect("change_scene", _on_scene_change)
 	self.connect("scene_ready", _on_scene_ready)
 	self.connect("fragment_collected", _on_fragment_collected)
-	self.connect("game_state", _on_game_state_change)	
+	self.connect("game_state", _on_game_state_change)
+	self.connect("car_drive_state", _on_car_drive_state_change)	
 
 
 ## Global variable
@@ -90,6 +99,16 @@ var current_game_state:GAME_STATE = GAME_STATE.START :
 		if current_game_state != value:
 			current_game_state = value
 			game_state.emit(current_game_state)
+
+# Drive State
+enum DRIVE_STATE {PARK, DRIVE}
+var prev_drive_state = DRIVE_STATE.PARK
+var current_drive_state:DRIVE_STATE = DRIVE_STATE.PARK :
+	set(value):
+		var prev_state = current_drive_state
+		if current_drive_state != value:
+			current_drive_state = value
+			car_drive_state.emit(current_drive_state)			
 
 # Play State
 enum PLAY_STATE {OVERWORLD, DISMANTLE}
