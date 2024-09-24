@@ -72,6 +72,8 @@ dismantle_rotate_right={
 3d_physics/layer_1="environment"
 3d_physics/layer_2="player"
 3d_physics/layer_3="enemies"
+3d_physics/layer_7="hurtbox"
+3d_physics/layer_8="hitbox"
 
 [physics]
 

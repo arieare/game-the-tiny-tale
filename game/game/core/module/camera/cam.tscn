@@ -1,15 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://qs7b7us5mqfj"]
+[gd_scene load_steps=6 format=3 uid="uid://qs7b7us5mqfj"]
 
 [ext_resource type="Script" path="res://game/core/module/camera/cam.gd" id="1_803c3"]
 [ext_resource type="PackedScene" uid="uid://b2dxrqowggtd0" path="res://game/core/module/camera/cam_shake_module.tscn" id="2_ypaig"]
 [ext_resource type="PackedScene" uid="uid://bmed287ao2mbo" path="res://game/core/module/camera/cam_follow_target_module.tscn" id="3_uvvt3"]
 [ext_resource type="PackedScene" uid="uid://c5ec4vxevb4jq" path="res://game/core/module/camera/cam_pixel_3d_module.tscn" id="4_pjefq"]
+[ext_resource type="PackedScene" uid="uid://cysq1khuun0wp" path="res://game/core/module/camera/cam_free_look_module.tscn" id="5_2q6q4"]
 
-[node name="cam" type="Node3D" node_paths=PackedStringArray("shake", "pixel_outline", "follow_cam")]
+[node name="cam" type="Node3D" node_paths=PackedStringArray("shake", "dither_filter", "free_look", "follow_cam")]
 script = ExtResource("1_803c3")
 shake = NodePath("cam/cam_shake")
-pixel_outline = NodePath("cam/cam_pixel_3d_module")
+dither_filter = NodePath("cam/cam_pixel_3d_module")
+free_look = NodePath("cam/cam_free_look")
 follow_cam = NodePath("cam/cam_follow_target")
+cam_offset_z = 17.0
+cam_fov = 100
 
 [node name="cam" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 12, 12)
@@ -20,3 +24,5 @@ fov = 100.0
 [node name="cam_follow_target" parent="cam" instance=ExtResource("3_uvvt3")]
 
 [node name="cam_pixel_3d_module" parent="cam" instance=ExtResource("4_pjefq")]
+
+[node name="cam_free_look" parent="cam" instance=ExtResource("5_2q6q4")]

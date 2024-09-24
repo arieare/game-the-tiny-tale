@@ -13,10 +13,10 @@ var ray_length = 100.0
 
 func ray_cast_from_mouse():
 	mouse = get_tree().get_root().get_viewport().get_mouse_position()
-	ray_query.from = root.cam.cam_child.project_ray_origin(mouse)
-	ray_query.to = ray_query.from + root.cam.cam_child.project_ray_normal(mouse) * ray_length
+	ray_query.from = root.cam.project_ray_origin(mouse)
+	ray_query.to = ray_query.from + root.cam.project_ray_normal(mouse) * ray_length
 	ray_query.collide_with_areas = false
-	return root.cam.cam_child.get_world_3d().direct_space_state.intersect_ray(ray_query)
+	return root.cam.get_world_3d().direct_space_state.intersect_ray(ray_query)
 
 #func GetChildNodeWithType(parentNode:Node, nodeType) -> Array:
 	#var type

@@ -4,23 +4,30 @@ extends Node3D
 var skill_manager: Node
 #@export var hit_box : Area3D
 @export var vfx_slash : GPUParticles3D
-
-@export var hit_box_node: NodePath
-@onready var hit_box:Area3D = get_node(hit_box_node)
+@export var hit_box:Area3D
 
 func _ready():
 	skill_manager = get_parent()
+	hit_box.monitorable = false
+	hit_box.monitoring = false
 	
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("attack") and skill_manager.current_weapon == skill_manager.WEAPON_OPTION.MELEE:
 		slash()
 
 func slash():
-	root.cam.shake.add_trauma(0.06)
+	hit_box.monitorable = true
+	hit_box.monitoring = true
+	hit_box.position.z += 0.2
+	root.cam.get_parent().shake.shake(0.06)
 	print("slash")
 	if vfx_slash:
 		vfx_slash.emitting = true
-	var hit_entities = hit_box.get_overlapping_bodies()
-	for entity in hit_entities:
-		if entity.is_in_group("enemy"):
-			print(entity)
+	await get_tree().create_timer(0.037).timeout
+	hit_box.monitorable = false
+	hit_box.monitoring = false
+	hit_box.position.z -= 0.2
+	#var hit_entities = hit_box.get_overlapping_bodies()
+	#for entity in hit_entities:
+		#if entity.is_in_group("enemy"):
+			#print(entity)

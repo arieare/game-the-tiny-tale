@@ -12,7 +12,7 @@ var parent: RigidBody3D
 @onready var feet_ray:RayCast3D = get_node(feet_ray_node)
 
 #Bobbing movement
-var step_magnitude:float = 12 # the bigger, the smaller step it is
+var step_magnitude:float = 14 # the bigger, the smaller step it is #12
 var walk_frequence:float = step_magnitude * 1.5
 var walk_amplitude:float = PI * walk_frequence
 var walk_decay:float = 0.5

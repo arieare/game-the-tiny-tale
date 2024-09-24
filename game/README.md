@@ -3,6 +3,13 @@
 ## TODO
 - [ ] dialog system
 - [ ] hitbox
+- [ ] disassemble artefact items
+- [ ] movement: zipzap
+- [ ] skill: aim hold
+- [ ] skill: combo melee
+- [ ] game: victory
+- [ ] game: death
+
 
 ## project folder
 - app

@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://dn0h6w1278b6y"]
+[gd_scene load_steps=37 format=3 uid="uid://dn0h6w1278b6y"]
 
 [ext_resource type="Script" path="res://game/player/player_controller.gd" id="1_wrxx6"]
 [ext_resource type="Script" path="res://game/player/player_input.gd" id="2_7eeft"]
@@ -23,7 +23,7 @@ radius = 0.25
 height = 0.75
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xbxn2"]
-radius = 1.0
+radius = 2.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b27o8"]
 emission_enabled = true
@@ -52,35 +52,45 @@ height = 0.6
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0nwyf"]
 render_priority = 0
 shader = ExtResource("13_hwtq7")
-shader_parameter/albedo = Color(0.416745, 0.728434, 0.917465, 0.466667)
-shader_parameter/roughness = 0.212
+shader_parameter/albedo = Color(0.414, 0.726033, 0.92, 0.133333)
+shader_parameter/roughness = 0.15
 shader_parameter/normal_strength = 1.0
 shader_parameter/edge_color = Color(0.682353, 0.733333, 0, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_ydgfx"]
 material = SubResource("ShaderMaterial_0nwyf")
-radius = 0.4
-height = 0.8
+radius = 0.6
+height = 1.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d2dv0"]
 shading_mode = 0
 
-[sub_resource type="PrismMesh" id="PrismMesh_oewsg"]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_rycxo"]
 material = SubResource("StandardMaterial3D_d2dv0")
-size = Vector3(0.3, 0.5, 0.15)
+radius = 0.2
+height = 0.5
+radial_segments = 12
+
+[sub_resource type="SphereMesh" id="SphereMesh_ggbyi"]
+material = SubResource("StandardMaterial3D_x7qyu")
+radius = 0.2
+height = 0.1
+radial_segments = 12
+is_hemisphere = true
 
 [sub_resource type="SphereMesh" id="SphereMesh_adauk"]
 material = SubResource("StandardMaterial3D_d2dv0")
 radius = 0.22
 height = 0.44
 
-[sub_resource type="SphereMesh" id="SphereMesh_sn48k"]
-radius = 0.15
-height = 0.3
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yw7ja"]
 shading_mode = 0
 albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_sn48k"]
+material = SubResource("StandardMaterial3D_yw7ja")
+radius = 0.2
+height = 0.4
 
 [sub_resource type="SphereMesh" id="SphereMesh_5yddk"]
 material = SubResource("StandardMaterial3D_yw7ja")
@@ -93,12 +103,9 @@ radius = 0.15
 height = 0.3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tpgop"]
+shading_mode = 0
 albedo_color = Color(1, 0, 0, 1)
-roughness = 0.12
-emission_enabled = true
-emission = Color(0.743186, 3.76623e-06, 7.70092e-07, 1)
-emission_energy_multiplier = 7.0
-rim_enabled = true
+albedo_texture_force_srgb = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_l4ngn"]
 material = SubResource("StandardMaterial3D_tpgop")
@@ -176,14 +183,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.08165e-12, -1, 0.5)
 
 [node name="Nock" type="Marker3D" parent="skill/SkillAttackRange/WeaponRange"]
 
-[node name="skill_attack_melee" type="Node3D" parent="skill" node_paths=PackedStringArray("vfx_slash")]
+[node name="skill_attack_melee" type="Node3D" parent="skill" node_paths=PackedStringArray("vfx_slash", "hit_box")]
 script = ExtResource("12_dv8mq")
 vfx_slash = NodePath("../../vfx/vfx_slash")
-hit_box_node = NodePath("weapon_melee/hit_box")
+hit_box = NodePath("weapon_melee/hit_box")
 
 [node name="weapon_melee" type="Node3D" parent="skill/skill_attack_melee"]
 
 [node name="hit_box" type="Area3D" parent="skill/skill_attack_melee/weapon_melee"]
+collision_layer = 128
+collision_mask = 64
 
 [node name="collision" type="CollisionShape3D" parent="skill/skill_attack_melee/weapon_melee/hit_box"]
 shape = SubResource("SphereShape3D_xbxn2")
@@ -212,12 +221,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.658941, 0)
 mesh = SubResource("SphereMesh_d8rtc")
 
 [node name="helmet" type="MeshInstance3D" parent="body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.716991, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, -0.075)
 mesh = SubResource("SphereMesh_ydgfx")
 
 [node name="beak" type="MeshInstance3D" parent="body"]
-transform = Transform3D(1, 0, 0, 0, -0.173648, 0.984808, 0, -0.984808, -0.173648, 0, 0.574146, -0.424512)
-mesh = SubResource("PrismMesh_oewsg")
+transform = Transform3D(1, 0, 0, 0, -0.0308349, 0.999525, 0, -0.999525, -0.0308349, 0, 0.551796, -0.254597)
+mesh = SubResource("CapsuleMesh_rycxo")
+
+[node name="ear" type="MeshInstance3D" parent="body"]
+transform = Transform3D(0.965926, -0.258819, -1.13133e-08, 0, -4.37114e-08, 1, -0.258819, -0.965926, -4.2222e-08, -0.22, 0.9, 0)
+mesh = SubResource("SphereMesh_ggbyi")
+
+[node name="ear2" type="MeshInstance3D" parent="body"]
+transform = Transform3D(0.965926, 0.258819, 1.13133e-08, 0, -4.37114e-08, 1, 0.258819, -0.965926, -4.2222e-08, 0.22, 0.9, 0)
+mesh = SubResource("SphereMesh_ggbyi")
 
 [node name="face" type="MeshInstance3D" parent="body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.658941, -0.113028)
@@ -226,12 +243,12 @@ mesh = SubResource("SphereMesh_adauk")
 [node name="arm" type="Node3D" parent="body"]
 
 [node name="left_arm" type="MeshInstance3D" parent="body/arm"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55, -0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55, -0.4, 0)
 mesh = SubResource("SphereMesh_sn48k")
 skeleton = NodePath("../right_arm")
 
 [node name="right_arm" type="MeshInstance3D" parent="body/arm"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.549726, -0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.55, -0.4, 0)
 mesh = SubResource("SphereMesh_sn48k")
 
 [node name="feet_ray" type="RayCast3D" parent="body"]

@@ -2,9 +2,10 @@ extends Node3D
 
 ## List of game node
 @onready var root = get_tree().get_root().get_child(0)
-@export var interaction_label: Label3D
+@export var interaction_label: Label
+@export var label_container: Control
 
-const BASE_INSTRUCTION_TEXT: String = "[E] to "
+const BASE_INSTRUCTION_TEXT: String = "to "
 
 var active_interactive_area: Array = []
 var can_interact: bool = true
@@ -21,11 +22,15 @@ func _process(delta: float) -> void:
 	if active_interactive_area.size() > 0 and can_interact:
 		active_interactive_area.sort_custom(_sort_by_distance_to_player)
 		interaction_label.text = BASE_INSTRUCTION_TEXT + active_interactive_area[0].interaction_name
-		interaction_label.global_position = active_interactive_area[0].global_position
-		interaction_label.global_position.y = active_interactive_area[0].global_position.y + active_interactive_area[0].collision.shape.radius
-		interaction_label.show()
+		var screen_space_coordinate = root.cam.unproject_position(active_interactive_area[0].global_position)
+		#var screen_space_coordinate = root.cam.unproject_position(root.player.global_position)
+		#interaction_label.global_position = Vector2(active_interactive_area[0].global_position.x, active_interactive_area[0].global_position.y)
+		label_container.position = screen_space_coordinate
+		label_container.position.x -= label_container.size.x / 2
+		label_container.position.y = screen_space_coordinate.y - 100
+		label_container.show()
 	else:
-		interaction_label.hide()
+		label_container.hide()
 		
 func _sort_by_distance_to_player(area_1, area_2):
 	var area_1_to_player = root.player.global_position.distance_to(area_1.global_position)
@@ -36,6 +41,6 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact") and can_interact:
 		if active_interactive_area.size() > 0:
 			can_interact = false	
-			interaction_label.hide()
+			label_container.hide()
 			await active_interactive_area[0].interact.call()
 			can_interact = true

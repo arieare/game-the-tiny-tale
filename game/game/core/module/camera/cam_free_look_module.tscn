@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cysq1khuun0wp"]
+
+[ext_resource type="Script" path="res://game/core/module/camera/cam_free_look_module.gd" id="1_u8se8"]
+
+[node name="cam_free_look" type="Node"]
+script = ExtResource("1_u8se8")

@@ -6,6 +6,10 @@ class_name InteractionAreaModule
 @export var interaction_name: String = "interact"
 
 @export var collision:CollisionShape3D
+@export var collision_radius: float = 2.0
+
+func _ready() -> void:
+	collision.shape.radius = collision_radius
 
 var interact: Callable = func():
 	pass
