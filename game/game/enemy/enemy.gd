@@ -3,23 +3,25 @@ extends RigidBody3D
 @export var interaction:InteractionAreaModule
 @export var hurt_box:HurtBoxModule
 var is_hurt_box: bool = false
+var knockback_vector: float = 0.0
+var knockback_decay: float = 15.0
+var knockback_timer: float = 0.0
 
 func _ready() -> void:
 	interaction.interact = Callable(self, "_test_interact")
 	hurt_box.attack = Callable(self, "_test_attack")
 	
-#func _physics_process(delta: float) -> void:
-	#if is_hurt_box:
-		#self.apply_central_impulse(Vector3(0,8,0) * self.mass)
+func _process(delta: float) -> void:
+	if knockback_timer > 0:
+		self.linear_velocity = Vector3(0,knockback_vector,0)
+		#self.apply_central_impulse(Vector3(0,knockback_vector,0) * self.mass)
+		knockback_timer -= knockback_decay * delta
 
 func _test_interact():
 	print("hello")
 
 func _test_attack():
-	#self.linear_velocity += -Vector3.FORWARD * 10
-	# Figure out knock back here
-	#self.apply_central_impulse(Vector3(0,10,0) * self.mass)
-	#is_hurt_box = true
-	#await get_tree().create_timer(0.01).timeout
-	#is_hurt_box = false
+	if knockback_vector <= 0:
+		knockback_vector = 20.0
+		knockback_timer = knockback_vector
 	print("ack!")

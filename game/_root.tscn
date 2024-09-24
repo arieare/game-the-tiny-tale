@@ -1,12 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://blu8emt5l7yex"]
+[gd_scene load_steps=7 format=3 uid="uid://blu8emt5l7yex"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_owfvw"]
-[ext_resource type="Script" path="res://game/core/common.gd" id="2_3rpfv"]
-[ext_resource type="Script" path="res://game/core/pid_controller.gd" id="2_bbwe3"]
+[ext_resource type="Script" path="res://game/core/common/common.gd" id="2_3rpfv"]
 [ext_resource type="Script" path="res://app/app.gd" id="2_prex2"]
-[ext_resource type="Script" path="res://game/core/day_time_system.gd" id="4_tavwi"]
-[ext_resource type="Script" path="res://game/core/input_setting.gd" id="5_ccuo1"]
-[ext_resource type="PackedScene" uid="uid://brj8m71cptbtw" path="res://game/core/module/interaction/interaction_manager.tscn" id="6_ytl1l"]
+[ext_resource type="Script" path="res://game/core/common/day_time_system.gd" id="4_tavwi"]
+[ext_resource type="Script" path="res://game/core/common/input_setting.gd" id="5_ccuo1"]
+[ext_resource type="PackedScene" uid="uid://brj8m71cptbtw" path="res://game/core/interaction/interaction_manager.tscn" id="6_ytl1l"]
 
 [node name="root" type="Node" node_paths=PackedStringArray("game_instance", "app_instance", "ui_instance", "common")]
 script = ExtResource("1_owfvw")
@@ -20,15 +19,11 @@ script = ExtResource("2_prex2")
 
 [node name="game" type="Node" parent="."]
 
-[node name="common" type="Node" parent="." node_paths=PackedStringArray("pid_controller", "day_time", "input_setting", "interaction_manager")]
+[node name="common" type="Node" parent="." node_paths=PackedStringArray("day_time", "input_setting", "interaction_manager")]
 script = ExtResource("2_3rpfv")
-pid_controller = NodePath("pid_controller")
 day_time = NodePath("day_time_system")
 input_setting = NodePath("input_setting")
 interaction_manager = NodePath("interaction_manager")
-
-[node name="pid_controller" type="Node" parent="common"]
-script = ExtResource("2_bbwe3")
 
 [node name="day_time_system" type="Node" parent="common"]
 script = ExtResource("4_tavwi")

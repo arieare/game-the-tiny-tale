@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmed287ao2mbo"]
-
-[ext_resource type="Script" path="res://game/core/module/camera/cam_follow_target_module.gd" id="1_71cvu"]
-
-[node name="cam_follow_target" type="Node"]
-script = ExtResource("1_71cvu")

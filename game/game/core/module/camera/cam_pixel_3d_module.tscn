@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c5ec4vxevb4jq"]
-
-[ext_resource type="Script" path="res://game/core/module/camera/cam_pixel_3d_module.gd" id="1_v4a3p"]
-
-[node name="cam_pixel_3d_module" type="Node"]
-script = ExtResource("1_v4a3p")

@@ -19,15 +19,11 @@ func slash():
 	hit_box.monitorable = true
 	hit_box.monitoring = true
 	hit_box.position.z += 0.2
-	root.cam.get_parent().shake.shake(0.06)
+	root.cam.cam_shake.shake(0.06)
 	print("slash")
 	if vfx_slash:
 		vfx_slash.emitting = true
-	await get_tree().create_timer(0.037).timeout
+	await get_tree().create_timer(0.02).timeout
 	hit_box.monitorable = false
 	hit_box.monitoring = false
 	hit_box.position.z -= 0.2
-	#var hit_entities = hit_box.get_overlapping_bodies()
-	#for entity in hit_entities:
-		#if entity.is_in_group("enemy"):
-			#print(entity)

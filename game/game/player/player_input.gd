@@ -15,7 +15,7 @@ func get_direction():
 	return vector_direction
 
 func get_jump_button() -> bool:
-	if Input.is_action_just_pressed("jump"):
-		return true
-	else:
-		return false
+	return Input.is_action_just_pressed("jump")
+
+func get_attack_button() -> bool:
+	return Input.is_action_just_pressed("attack")

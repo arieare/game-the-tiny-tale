@@ -80,29 +80,6 @@ func _physics_process(delta: float) -> void:
 		if move_bobbing :move_bobbing.walk_bobbing(delta)
 
 
-## With top down camera facing direction
-#
-#
-	## Get the input direction and handle the movement/deceleration.
-	## As good practice, you should replace UI actions with custom gameplay actions.
-	#var input_dir = Input.get_vector("moveLeft", "moveRight", "moveUp", "moveDown")
-	#var direction
-	#
-	#if game.mainCam:
-		#direction = (Vector3(-1,-1,-1) * game.mainCam.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-		#direction = -direction
-	#else:
-		#direction = (game.player.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	#if direction:
-		#game.player.velocity.x = direction.x * SPEED
-		#game.player.velocity.z = direction.z * SPEED
-		##game.player.rotation.y = atan2(-game.player.velocity.x, -game.player.velocity.z)
-	#else:
-		#game.player.velocity.x = move_toward(game.player.velocity.x, 0, SPEED)
-		#game.player.velocity.z = move_toward(game.player.velocity.z, 0, SPEED)
-#
-
-
 ### FX
 #@export var fx_transform_node: NodePath
 #@onready var fx_transform:GPUParticles3D = get_node(fx_transform_node)

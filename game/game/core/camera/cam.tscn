@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://qs7b7us5mqfj"]
+
+[ext_resource type="Script" path="res://game/core/camera/cam.gd" id="1_803c3"]
+
+[node name="cam" type="Node3D"]
+script = ExtResource("1_803c3")
+cam_offset_z = 17.0
+cam_fov = 100
+
+[node name="cam" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 12, 12)
+fov = 100.0
