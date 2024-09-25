@@ -10,7 +10,7 @@ func get_input_accel() -> float:
 	return input_accelerate
 
 func get_input_steer() -> float:
-	input_steer = Input.get_axis("steer_right", "steer_left")
+	input_steer = Input.get_axis("move_right", "move_left")
 	return input_steer 
 
 func get_input_drift() -> bool:

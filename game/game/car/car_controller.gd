@@ -8,7 +8,7 @@ extends RigidBody3D
 @export var interaction:InteractionAreaModule
 
 func _interact_drive():
-	root.emit_signal("car_drive_state", root.DRIVE_STATE.DRIVE)
+	root.common.event_bus.emit_signal("car_drive_state", root.DRIVE_STATE.DRIVE)
 
 @export var car_collision: CollisionShape3D
 var raycast_array = ["fl","fr","bl","br"]
@@ -38,9 +38,6 @@ var steering_input
 
 var bool_is_drifting = false
 var drifting_input: bool
-
-enum CAR_STATE {PARK, DRIVE}
-var current_car_state: CAR_STATE = CAR_STATE.PARK
 
 func register_self_to_root():
 	root.car = self

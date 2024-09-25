@@ -10,7 +10,7 @@ func assert_parent(parent_node: RigidBody3D):
 	parent = parent_node
 
 func look_at_target():
-	mouse_ray_cast = parent.root.common.mouse_ray_cast.cast(parent.root.cam.cam_child)
+	mouse_ray_cast = parent.root.common["mouse_ray_cast"].cast(parent.root.cam.cam_child)
 	if mouse_ray_cast:
 		if not mouse_ray_cast.is_empty() and mouse_ray_cast:
 			look_aim.global_position.x = mouse_ray_cast.position.x

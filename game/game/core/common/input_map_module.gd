@@ -1,4 +1,5 @@
 extends Node
+class_name CommonInputMap
 
 func input_setting():
 	var event_w := InputEventKey.new()

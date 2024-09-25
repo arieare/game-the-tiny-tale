@@ -19,7 +19,7 @@ func slash():
 	hit_box.monitorable = true
 	hit_box.monitoring = true
 	hit_box.position.z += 0.2
-	root.cam.cam_shake.shake(0.06)
+	root.cam.cam_feature["cam_shake"].shake(0.075)
 	print("slash")
 	if vfx_slash:
 		vfx_slash.emitting = true

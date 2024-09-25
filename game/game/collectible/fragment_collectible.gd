@@ -14,4 +14,4 @@ func _interact_pick_fragment():
 	tween.tween_property(self, "global_position", move_toward_position, 0.2)
 	await tween.finished
 	self.queue_free()
-	root.emit_signal("fragment_collected", 1)
+	root.common.event_bus.emit_signal("fragment_collected", 1)

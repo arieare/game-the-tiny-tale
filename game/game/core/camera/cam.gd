@@ -6,16 +6,13 @@ extends Node3D
 @onready var cam_child:Camera3D = self.get_child(0)
 
 ## Modules
-@onready var cam_shake:Cam = CamShake.new()
-@onready var cam_follow:Cam = CamFollowTarget.new()
+var cam_feature:Dictionary = {}
 @onready var cam_filter:Cam = CamFilterDither.new()
-@onready var cam_free_look:Cam = CamFreeLook.new()
-#@export var follow_target: Node
 
 func init_modules():
-	cam_shake.assert_cam_parent(self)
-	cam_follow.assert_cam_parent(self)
-	cam_free_look.assert_cam_parent(self)
+	cam_feature["cam_shake"].assert_cam_parent(self)
+	cam_feature["cam_follow"].assert_cam_parent(self)
+	cam_feature["cam_free_look"].assert_cam_parent(self)
 	cam_filter.assert_cam_parent(self)
 
 ## Camera Setting
@@ -34,6 +31,8 @@ func register_self_to_root():
 	root.cam = self
 
 func _ready() -> void:	
+	root.get_module(cam_child, cam_feature)
+	print(cam_feature)
 	register_self_to_root()
 	cam_setting()
 	init_modules()
@@ -42,7 +41,6 @@ func _ready() -> void:
 		cam_filter.init_pixelart_style(scene_root, cam_filter.dither_filter)	
 
 func _process(delta):
-	if cam_shake: cam_shake.trauma_shake(delta)
-	if cam_follow: 
-		if root.cam_target: cam_follow.follow_cam(root.cam_target, cam_offset)
-	if cam_free_look: cam_free_look.rotate_cam()
+	cam_feature["cam_shake"].apply_shake(delta)
+	cam_feature["cam_follow"].follow_cam(root.cam_target, cam_offset)
+	cam_feature["cam_free_look"].rotate_cam()

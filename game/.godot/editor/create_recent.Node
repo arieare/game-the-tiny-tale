@@ -1,7 +1,8 @@
+MeshInstance3D
+Node
 CollisionShape3D
 Area3D
 RigidBody3D
-MeshInstance3D
 Label
 RichTextLabel
 TextureRect
@@ -11,4 +12,3 @@ Node3D
 ColorRect
 CSGSphere3D
 MultiMeshInstance3D
-CanvasLayer

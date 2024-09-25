@@ -14,8 +14,8 @@ func get_direction():
 	var vector_direction: Vector3 = Vector3(input.x, 0, input.y)
 	return vector_direction
 
-func get_jump_button() -> bool:
+func want_to_jump() -> bool:
 	return Input.is_action_just_pressed("jump")
 
-func get_attack_button() -> bool:
+func want_to_attack() -> bool:
 	return Input.is_action_just_pressed("attack")

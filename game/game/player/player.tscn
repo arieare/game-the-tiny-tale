@@ -1,14 +1,14 @@
-[gd_scene load_steps=37 format=3 uid="uid://dn0h6w1278b6y"]
+[gd_scene load_steps=47 format=3 uid="uid://dn0h6w1278b6y"]
 
 [ext_resource type="Script" path="res://game/player/player_controller.gd" id="1_wrxx6"]
 [ext_resource type="Script" path="res://game/player/player_input.gd" id="2_7eeft"]
-[ext_resource type="Script" path="res://game/player/movement/movement_walk.gd" id="3_e4a4h"]
-[ext_resource type="Script" path="res://game/player/movement/movement_levitation.gd" id="4_msgk3"]
+[ext_resource type="Script" path="res://game/player/module/ground_check_module.gd" id="2_8bli5"]
+[ext_resource type="Script" path="res://game/player/module/ground_ray_cast.gd" id="2_smlu1"]
+[ext_resource type="Script" path="res://game/player/module/levitate_module.gd" id="4_rpndc"]
 [ext_resource type="Script" path="res://game/player/movement/movement_upright.gd" id="5_eisyv"]
 [ext_resource type="Script" path="res://game/player/movement/movement_jump.gd" id="7_4p8vc"]
 [ext_resource type="Script" path="res://game/player/movement/movement_look_at.gd" id="8_dkbsy"]
 [ext_resource type="Script" path="res://game/player/movement/movement_bobbing.gd" id="8_dve63"]
-[ext_resource type="Script" path="res://game/player/movement/movement_dive.gd" id="9_je5vt"]
 [ext_resource type="Script" path="res://game/player/skill/skill.gd" id="10_3lyut"]
 [ext_resource type="Script" path="res://game/player/skill/SkillShooting.gd" id="11_hjimd"]
 [ext_resource type="Script" path="res://game/player/skill/skill_attack_melee.gd" id="12_dv8mq"]
@@ -17,6 +17,14 @@
 [ext_resource type="PackedScene" uid="uid://bqxe1645pw8ku" path="res://game/player/weapons/projectile.tscn" id="14_8673b"]
 [ext_resource type="PackedScene" uid="uid://b2c3ojnu6xfo7" path="res://content/vfx/vfx_running_dust.tscn" id="15_bkycr"]
 [ext_resource type="PackedScene" uid="uid://dcayiboph0oe6" path="res://content/vfx/vfx_slash.tscn" id="16_enbpp"]
+[ext_resource type="Script" path="res://game/player/player_state/movement_state_machine.gd" id="18_n6nuk"]
+[ext_resource type="Script" path="res://game/player/player_state/idle_state.gd" id="18_yj4js"]
+[ext_resource type="Script" path="res://game/player/player_state/jump_state.gd" id="20_bx6nq"]
+[ext_resource type="Script" path="res://game/player/player_state/on_ground_state.gd" id="21_bjuqh"]
+[ext_resource type="Script" path="res://game/player/player_state/fall_state.gd" id="21_hdg3a"]
+[ext_resource type="Script" path="res://game/player/player_state/walk_state.gd" id="21_nucca"]
+[ext_resource type="Script" path="res://game/player/player_state/position_state_machine.gd" id="23_x3smm"]
+[ext_resource type="Script" path="res://game/player/player_state/on_air_state.gd" id="24_ift68"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i1yth"]
 radius = 0.25
@@ -62,25 +70,40 @@ material = SubResource("ShaderMaterial_0nwyf")
 radius = 0.6
 height = 1.2
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n8723"]
+diffuse_mode = 3
+albedo_color = Color(1, 0, 0, 1)
+roughness = 0.0
+emission_enabled = true
+emission = Color(1, 0.275436, 0.436652, 1)
+emission_energy_multiplier = 1.95
+
+[sub_resource type="SphereMesh" id="SphereMesh_ce7m5"]
+material = SubResource("StandardMaterial3D_n8723")
+radius = 0.05
+height = 0.1
+radial_segments = 12
+rings = 8
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d2dv0"]
 shading_mode = 0
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_rycxo"]
 material = SubResource("StandardMaterial3D_d2dv0")
-radius = 0.2
+radius = 0.1
 height = 0.5
 radial_segments = 12
 
 [sub_resource type="SphereMesh" id="SphereMesh_ggbyi"]
 material = SubResource("StandardMaterial3D_x7qyu")
-radius = 0.2
+radius = 0.4
 height = 0.1
 radial_segments = 12
 is_hemisphere = true
 
 [sub_resource type="SphereMesh" id="SphereMesh_adauk"]
 material = SubResource("StandardMaterial3D_d2dv0")
-radius = 0.22
+radius = 0.25
 height = 0.44
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yw7ja"]
@@ -111,29 +134,34 @@ albedo_texture_force_srgb = true
 material = SubResource("StandardMaterial3D_tpgop")
 size = Vector3(0.2, 0.2, 0.2)
 
-[node name="player" type="RigidBody3D" groups=["player"]]
+[node name="player" type="RigidBody3D" node_paths=PackedStringArray("collider", "ray", "body", "move_look_at", "move_bobbing", "move_upright", "player_input", "movement_state_machine", "position_state_machine") groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 collision_layer = 2
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -0.8, 0)
 freeze_mode = 1
 script = ExtResource("1_wrxx6")
-player_input_node = NodePath("controller/input")
-collider_node = NodePath("collider")
-ray_node = NodePath("ray")
-body_node = NodePath("body")
-move_look_at_node = NodePath("movement/lookat")
-move_walk_node = NodePath("movement/walk")
-move_bobbing_node = NodePath("movement/bobbing")
-move_levitate_node = NodePath("movement/levitation")
-move_upright_node = NodePath("movement/upright")
-move_jump_node = NodePath("movement/jump")
-move_dive_node = NodePath("movement/dive")
+collider = NodePath("collider")
+ray = NodePath("ray")
+body = NodePath("body")
+move_look_at = NodePath("movement/lookat")
+move_bobbing = NodePath("movement/bobbing")
+move_upright = NodePath("movement/upright")
+player_input = NodePath("controller/input")
+movement_state_machine = NodePath("controller/movement_state_machine")
+position_state_machine = NodePath("controller/position_state_machine")
 
 [node name="collider" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_i1yth")
 
 [node name="ray" type="RayCast3D" parent="."]
+script = ExtResource("2_smlu1")
+
+[node name="ground_check" type="Node" parent="ray"]
+script = ExtResource("2_8bli5")
+
+[node name="levitate" type="Node" parent="ray"]
+script = ExtResource("4_rpndc")
 
 [node name="movement" type="Node3D" parent="."]
 
@@ -141,16 +169,8 @@ shape = SubResource("CapsuleShape3D_i1yth")
 script = ExtResource("8_dkbsy")
 look_aim = NodePath("../../controller/look_at_cursor/pointer")
 
-[node name="levitation" type="Node" parent="movement"]
-script = ExtResource("4_msgk3")
-LEV_DISTANCE = 1.0
-
 [node name="upright" type="Node" parent="movement"]
 script = ExtResource("5_eisyv")
-
-[node name="walk" type="Node3D" parent="movement"]
-script = ExtResource("3_e4a4h")
-vfx_running_dust_node = NodePath("../../vfx/vfx_running_dust")
 
 [node name="bobbing" type="Node3D" parent="movement"]
 script = ExtResource("8_dve63")
@@ -160,9 +180,6 @@ feet_ray_node = NodePath("../../body/feet_ray")
 
 [node name="jump" type="Node" parent="movement"]
 script = ExtResource("7_4p8vc")
-
-[node name="dive" type="Node" parent="movement"]
-script = ExtResource("9_je5vt")
 
 [node name="skill" type="Node3D" parent="."]
 script = ExtResource("10_3lyut")
@@ -221,23 +238,28 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.658941, 0)
 mesh = SubResource("SphereMesh_d8rtc")
 
 [node name="helmet" type="MeshInstance3D" parent="body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, -0.075)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.892723, -0.075)
 mesh = SubResource("SphereMesh_ydgfx")
 
+[node name="nose" type="MeshInstance3D" parent="body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, -0.486785)
+mesh = SubResource("SphereMesh_ce7m5")
+skeleton = NodePath("../beak")
+
 [node name="beak" type="MeshInstance3D" parent="body"]
-transform = Transform3D(1, 0, 0, 0, -0.0308349, 0.999525, 0, -0.999525, -0.0308349, 0, 0.551796, -0.254597)
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 0.537359, -0.266859)
 mesh = SubResource("CapsuleMesh_rycxo")
 
 [node name="ear" type="MeshInstance3D" parent="body"]
-transform = Transform3D(0.965926, -0.258819, -1.13133e-08, 0, -4.37114e-08, 1, -0.258819, -0.965926, -4.2222e-08, -0.22, 0.9, 0)
+transform = Transform3D(0.866026, -0.5, -2.18557e-08, 0, -4.37114e-08, 1, -0.5, -0.866026, -3.78552e-08, -0.45, 1, 0)
 mesh = SubResource("SphereMesh_ggbyi")
 
 [node name="ear2" type="MeshInstance3D" parent="body"]
-transform = Transform3D(0.965926, 0.258819, 1.13133e-08, 0, -4.37114e-08, 1, 0.258819, -0.965926, -4.2222e-08, 0.22, 0.9, 0)
+transform = Transform3D(0.866026, 0.5, 2.18557e-08, 0, -4.37114e-08, 1, 0.5, -0.866026, -3.78552e-08, 0.45, 1, 0)
 mesh = SubResource("SphereMesh_ggbyi")
 
 [node name="face" type="MeshInstance3D" parent="body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.658941, -0.113028)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.658941, -0.0814021)
 mesh = SubResource("SphereMesh_adauk")
 
 [node name="arm" type="Node3D" parent="body"]
@@ -287,3 +309,32 @@ script = ExtResource("2_7eeft")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 mesh = SubResource("BoxMesh_l4ngn")
 skeleton = NodePath("../../root/@EditorNode@17030/@Panel@13/@VBoxContainer@14/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@25/DockVSplitCenter/@VSplitContainer@52/@VBoxContainer@53/@PanelContainer@98/MainScreen/@CanvasItemEditor@9331/@VSplitContainer@9153/@HSplitContainer@9155/@HSplitContainer@9157/@Control@9158/@SubViewportContainer@9159/@SubViewport@9160/player")
+
+[node name="movement_state_machine" type="Node" parent="controller" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("18_n6nuk")
+initial_state = NodePath("idle")
+
+[node name="idle" type="Node" parent="controller/movement_state_machine"]
+script = ExtResource("18_yj4js")
+
+[node name="walk" type="Node" parent="controller/movement_state_machine" node_paths=PackedStringArray("vfx_running_dust")]
+script = ExtResource("21_nucca")
+vfx_running_dust = NodePath("../../../vfx/vfx_running_dust")
+
+[node name="jump" type="Node" parent="controller/movement_state_machine"]
+script = ExtResource("20_bx6nq")
+
+[node name="fall" type="Node" parent="controller/movement_state_machine"]
+script = ExtResource("21_hdg3a")
+
+[node name="dash" type="Node" parent="controller/movement_state_machine"]
+
+[node name="position_state_machine" type="Node" parent="controller" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("23_x3smm")
+initial_state = NodePath("on_air")
+
+[node name="on_ground" type="Node" parent="controller/position_state_machine"]
+script = ExtResource("21_bjuqh")
+
+[node name="on_air" type="Node" parent="controller/position_state_machine"]
+script = ExtResource("24_ift68")

@@ -1,39 +1,45 @@
-[gd_scene load_steps=7 format=3 uid="uid://blu8emt5l7yex"]
+[gd_scene load_steps=10 format=3 uid="uid://blu8emt5l7yex"]
 
-[ext_resource type="Script" path="res://game/game.gd" id="1_owfvw"]
-[ext_resource type="Script" path="res://game/core/common/common.gd" id="2_3rpfv"]
+[ext_resource type="Script" path="res://root.gd" id="1_owfvw"]
+[ext_resource type="Script" path="res://game/core/common/pid_controller_module.gd" id="2_bbwe3"]
 [ext_resource type="Script" path="res://app/app.gd" id="2_prex2"]
-[ext_resource type="Script" path="res://game/core/common/day_time_system.gd" id="4_tavwi"]
-[ext_resource type="Script" path="res://game/core/common/input_setting.gd" id="5_ccuo1"]
+[ext_resource type="Script" path="res://game/core/common/day_time_module.gd" id="4_tavwi"]
+[ext_resource type="Script" path="res://game/core/common/input_map_module.gd" id="5_ccuo1"]
+[ext_resource type="Script" path="res://game/core/common/event_bus_module.gd" id="5_f7ete"]
 [ext_resource type="PackedScene" uid="uid://brj8m71cptbtw" path="res://game/core/interaction/interaction_manager.tscn" id="6_ytl1l"]
+[ext_resource type="Script" path="res://game/core/common/mouse_ray_cast_module.gd" id="7_gyq80"]
+[ext_resource type="Script" path="res://game/core/common/scene_manager_module.gd" id="9_leehc"]
 
-[node name="root" type="Node" node_paths=PackedStringArray("game_instance", "app_instance", "ui_instance", "common")]
+[node name="root" type="Node"]
 script = ExtResource("1_owfvw")
-game_instance = NodePath("game")
-app_instance = NodePath("app")
-ui_instance = NodePath("ui")
-common = NodePath("common")
+starting_hour = 6
 
 [node name="app" type="Node" parent="."]
 script = ExtResource("2_prex2")
 
 [node name="game" type="Node" parent="."]
 
-[node name="common" type="Node" parent="." node_paths=PackedStringArray("day_time", "input_setting", "interaction_manager")]
-script = ExtResource("2_3rpfv")
-day_time = NodePath("day_time_system")
-input_setting = NodePath("input_setting")
-interaction_manager = NodePath("interaction_manager")
+[node name="common" type="Node" parent="."]
 
-[node name="day_time_system" type="Node" parent="common"]
+[node name="day_time" type="Node" parent="common"]
 script = ExtResource("4_tavwi")
-hour = 16
-tick_per_second = 200
 
-[node name="input_setting" type="Node" parent="common"]
+[node name="event_bus" type="Node" parent="common"]
+script = ExtResource("5_f7ete")
+
+[node name="input_map" type="Node" parent="common"]
 script = ExtResource("5_ccuo1")
 
 [node name="interaction_manager" parent="common" instance=ExtResource("6_ytl1l")]
+
+[node name="mouse_ray_cast" type="Node" parent="common"]
+script = ExtResource("7_gyq80")
+
+[node name="pid_controller" type="Node" parent="common"]
+script = ExtResource("2_bbwe3")
+
+[node name="scene_manager" type="Node" parent="common"]
+script = ExtResource("9_leehc")
 
 [node name="ui" type="Node" parent="."]
 

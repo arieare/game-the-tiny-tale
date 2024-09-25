@@ -11,7 +11,7 @@ var trauma_power = 2  # Trauma exponent. Use [2, 3].
 func shake(amount):
 	trauma = min(trauma + amount, 1.0)
 	
-func trauma_shake(delta):
+func apply_shake(delta):
 	if trauma:
 		trauma = max(trauma - decay * delta, 0)
 		var amount = pow(trauma, trauma_power)

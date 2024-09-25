@@ -1,14 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://b36g6rofkhosy"]
+[gd_scene load_steps=8 format=3 uid="uid://b36g6rofkhosy"]
 
 [ext_resource type="Script" path="res://ui/debug_ui/debug_ui.gd" id="1_5qh6y"]
 [ext_resource type="FontFile" uid="uid://w3076qvrbys5" path="res://content/font/DepartureMono-Regular.otf" id="1_uuxy0"]
 [ext_resource type="Shader" path="res://content/shader/scanline.gdshader" id="3_045yi"]
+[ext_resource type="Shader" path="res://content/shader/greyscale.gdshader" id="3_x58en"]
 
 [sub_resource type="Theme" id="Theme_nplme"]
 default_font = ExtResource("1_uuxy0")
 default_font_size = 24
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nvo0i"]
+shader = ExtResource("3_x58en")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5c1c8"]
 shader = ExtResource("3_045yi")
 shader_parameter/screen_width = 1600.0
 shader_parameter/screen_height = 900.0
@@ -89,7 +93,17 @@ text = "◉ × 0"
 horizontal_alignment = 1
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_nvo0i")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_5c1c8")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

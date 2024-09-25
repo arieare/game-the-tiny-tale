@@ -1,5 +1,6 @@
-res://game/core/module/interaction
-res://game/core/module/camera
+res://game/player/player_state
+res://game/player/module
+res://content/shader
 res://content/material/
 res://content/texture
 res://content/terrain
@@ -8,7 +9,6 @@ res://game/enemy
 res://game/prototype
 res://game
 res://game/core
-res://content/shader
 res://game/player/movement
 res://content/vfx
 res://game/player

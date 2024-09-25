@@ -44,36 +44,7 @@ func jump(should_jump:bool, delta)->void:
 			body_position.x += forward_velocity / 50
 			jump_velocity -= jump_dampen
 			if jump_velocity <= 0.01:
-				parent.freeze = false
-			if jump_velocity <= 0:
-				fall(delta)
-				jump_velocity = 0		
+				parent.freeze = fals	
 		parent.global_position = body_position
 		pass
 		
-
-#func fall(delta):
-	#if !Input.is_action_just_pressed("jump") or parent.linear_velocity.y <= 0.0:
-		#parent.apply_central_force(Vector3.DOWN * 50 * parent.mass)	
-
-
-func fall(delta):
-	if !parent.move_levitate.is_on_floor:
-	#if parent.linear_velocity.y <= 0.02 and !parent.move_levitate.is_on_floor:
-		is_jumping = false
-		parent.freeze = false
-		var vertical_velocity = parent.linear_velocity * Vector3.UP
-		var target_velocity: Vector3 = (Vector3.DOWN * FALL_SPEED)
-		var acceleration_goal = target_velocity - vertical_velocity	
-		var target_acceleration = acceleration_goal / delta
-			
-		# clamp ForceToGoalAcceleration to our maximum allowed acceleration.
-		if target_acceleration.length() > FALL_SPEED: 
-			target_acceleration = (target_acceleration.normalized() * FALL_SPEED)
-		
-		var tween = create_tween().set_trans(Tween.TRANS_BOUNCE)
-		tween.tween_property(parent.body,"scale:y",1,0.03)	
-		
-		parent.apply_central_impulse(Vector3.DOWN * FALL_SPEED * parent.mass)
-		#if parent.move_levitate.is_on_floor:
-			#parent.linear_velocity.y = 0
