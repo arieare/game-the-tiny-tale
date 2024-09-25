@@ -44,7 +44,7 @@ func jump(should_jump:bool, delta)->void:
 			body_position.x += forward_velocity / 50
 			jump_velocity -= jump_dampen
 			if jump_velocity <= 0.01:
-				parent.freeze = fals	
+				parent.freeze = false	
 		parent.global_position = body_position
 		pass
 		
