@@ -8,6 +8,7 @@ func aim_follow_cursor(cursor:Variant):
 	if mouse_ray_cast:
 		if not mouse_ray_cast.is_empty() and mouse_ray_cast:
 			cursor.global_position.x = mouse_ray_cast.position.x
+			cursor.global_position.y = mouse_ray_cast.position.y
 			cursor.global_position.z = mouse_ray_cast.position.z	
 
 func _process(delta: float) -> void:

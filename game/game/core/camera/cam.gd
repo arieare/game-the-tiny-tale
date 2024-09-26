@@ -10,9 +10,11 @@ var cam_feature:Dictionary = {}
 @onready var cam_filter:Cam = CamFilterDither.new()
 
 func init_modules():
-	cam_feature["cam_shake"].assert_cam_parent(self)
-	cam_feature["cam_follow"].assert_cam_parent(self)
-	cam_feature["cam_free_look"].assert_cam_parent(self)
+	for key in cam_feature:
+		cam_feature[key].assert_cam_parent(self)
+	#cam_feature["cam_shake"].assert_cam_parent(self)
+	#cam_feature["cam_follow"].assert_cam_parent(self)
+	#cam_feature["cam_free_look"].assert_cam_parent(self)
 	cam_filter.assert_cam_parent(self)
 
 ## Camera Setting

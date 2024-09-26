@@ -40,5 +40,5 @@ func walk(direction, delta, actor):
 	if target_acceleration.length() > ACCELERATION: 
 		target_acceleration = (target_acceleration.normalized() * ACCELERATION)
 	
-	var leaning_point: Vector3 = Vector3(0, -0.75, 0)
+	var leaning_point: Vector3 = Vector3(0, -0.8, 0)
 	actor.apply_force(target_acceleration * actor.mass, leaning_point)

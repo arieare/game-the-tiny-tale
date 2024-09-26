@@ -109,7 +109,6 @@ height = 0.65
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yw7ja"]
 shading_mode = 0
-albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_sn48k"]
 material = SubResource("StandardMaterial3D_yw7ja")
@@ -206,12 +205,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.08165e-12, -1, 0.5)
 
 [node name="Nock" type="Marker3D" parent="skill/SkillAttackRange/WeaponRange"]
 
-[node name="skill_attack_melee" type="Node3D" parent="skill" node_paths=PackedStringArray("vfx_slash", "arm_slash", "arm_target_slash", "arm_target_default", "hit_box")]
+[node name="skill_attack_melee" type="Node3D" parent="skill" node_paths=PackedStringArray("vfx_slash", "arm_slash", "arm_left", "arm_target_slash_start", "arm_target_slash_mid", "arm_target_slash_end", "arm_target_slash_left", "arm_target_default_right", "arm_target_default_left", "hit_box")]
 script = ExtResource("12_dv8mq")
 vfx_slash = NodePath("../../skin/body/vfx/vfx_slash")
 arm_slash = NodePath("../../skin/body/arm/right_arm")
-arm_target_slash = NodePath("../../skin/body/arm_target/target_slash")
-arm_target_default = NodePath("../../skin/body/arm_target/target_default")
+arm_left = NodePath("../../skin/body/arm/left_arm")
+arm_target_slash_start = NodePath("../../skin/body/arm/arm_target/target_slash/target_slash_start")
+arm_target_slash_mid = NodePath("../../skin/body/arm/arm_target/target_slash/target_slash_mid")
+arm_target_slash_end = NodePath("../../skin/body/arm/arm_target/target_slash/target_slash_end")
+arm_target_slash_left = NodePath("../../skin/body/arm/arm_target/target_slash/target_slash_left")
+arm_target_default_right = NodePath("../../skin/body/arm/arm_target/target_default_right")
+arm_target_default_left = NodePath("../../skin/body/arm/arm_target/target_default_left")
 hit_box = NodePath("weapon_melee/hit_box")
 
 [node name="weapon_melee" type="Node3D" parent="skill/skill_attack_melee"]
@@ -292,6 +296,36 @@ skeleton = NodePath("../right_arm")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.55, -0.4, 0)
 mesh = SubResource("SphereMesh_sn48k")
 
+[node name="arm_target" type="Node3D" parent="skin/body/arm"]
+
+[node name="target_slash" type="Node3D" parent="skin/body/arm/arm_target"]
+
+[node name="target_slash_start" type="Marker3D" parent="skin/body/arm/arm_target/target_slash"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.817306, -0.406611, -1.02316)
+
+[node name="target_slash_mid" type="Marker3D" parent="skin/body/arm/arm_target/target_slash"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.093168, 0.136701, -1.40267)
+
+[node name="target_slash_end" type="Marker3D" parent="skin/body/arm/arm_target/target_slash"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.01028, 0.611347, -0.738855)
+
+[node name="target_slash_left" type="Marker3D" parent="skin/body/arm/arm_target/target_slash"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.400601, 0.0561566, 0.870597)
+
+[node name="target_default_right" type="Marker3D" parent="skin/body/arm/arm_target"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.55, -0.4, 0)
+
+[node name="target_default_left" type="Marker3D" parent="skin/body/arm/arm_target"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55, -0.4, 0)
+
+[node name="target_falling" type="Node3D" parent="skin/body/arm/arm_target"]
+
+[node name="target_falling_right" type="Marker3D" parent="skin/body/arm/arm_target/target_falling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.55, 1.5578, 0)
+
+[node name="target_falling_left" type="Marker3D" parent="skin/body/arm/arm_target/target_falling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55, 1.5578, 0)
+
 [node name="tail" type="Node3D" parent="skin/body"]
 
 [node name="tail" type="MeshInstance3D" parent="skin/body/tail"]
@@ -324,14 +358,6 @@ speed_scale = 1.0
 
 [node name="vfx_slash" parent="skin/body/vfx" instance=ExtResource("16_enbpp")]
 
-[node name="arm_target" type="Node3D" parent="skin/body"]
-
-[node name="target_slash" type="Marker3D" parent="skin/body/arm_target"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.01028, 0.611347, -0.738855)
-
-[node name="target_default" type="Marker3D" parent="skin/body/arm_target"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.55, -0.4, 0)
-
 [node name="controller" type="Node" parent="."]
 
 [node name="aim_cursor" type="Node3D" parent="controller" node_paths=PackedStringArray("look_aim_cursor")]
@@ -360,8 +386,14 @@ vfx_running_dust = NodePath("../../../skin/body/vfx/vfx_running_dust")
 [node name="jump" type="Node" parent="controller/movement_state_machine"]
 script = ExtResource("20_bx6nq")
 
-[node name="fall" type="Node" parent="controller/movement_state_machine"]
+[node name="fall" type="Node" parent="controller/movement_state_machine" node_paths=PackedStringArray("arm_right", "arm_left", "arm_target_fall_right", "arm_target_fall_left", "arm_target_default_right", "arm_target_default_left")]
 script = ExtResource("21_hdg3a")
+arm_right = NodePath("../../../skin/body/arm/right_arm")
+arm_left = NodePath("../../../skin/body/arm/left_arm")
+arm_target_fall_right = NodePath("../../../skin/body/arm/arm_target/target_falling/target_falling_right")
+arm_target_fall_left = NodePath("../../../skin/body/arm/arm_target/target_falling/target_falling_left")
+arm_target_default_right = NodePath("../../../skin/body/arm/arm_target/target_default_right")
+arm_target_default_left = NodePath("../../../skin/body/arm/arm_target/target_default_left")
 
 [node name="dash" type="Node" parent="controller/movement_state_machine"]
 
