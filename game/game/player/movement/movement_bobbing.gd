@@ -19,12 +19,6 @@ var hip_width: float = 0.2
 var step_height:Vector3 = Vector3(0,0.25,0)
 var step_forward_distance:Vector3 = Vector3(0,0,-0.5)
 
-## FX
-#@export var sfx_step_node : NodePath
-#@onready var sfx_step:AudioStreamPlayer = get_node(sfx_step_node)
-#@export var sfx_step_right_node : NodePath
-#@onready var sfx_step_right:AudioStreamPlayer = get_node(sfx_step_right_node)
-
 func assert_parent(parent_node: RigidBody3D):
 	parent = parent_node
 

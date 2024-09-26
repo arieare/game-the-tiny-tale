@@ -1,6 +1,6 @@
 extends Node
 
-@export var LEV_DISTANCE: float = 1.2
+@export var LEV_DISTANCE: float = 1.1
 var LEV_STIFFNESS: float = 200
 var LEV_DAMP: float = 13
 

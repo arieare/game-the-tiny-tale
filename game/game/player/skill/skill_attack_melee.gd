@@ -33,7 +33,6 @@ func slash():
 	var tween_left = create_tween().set_trans(Tween.TRANS_BOUNCE)
 	if vfx_slash:
 		vfx_slash.emitting = true
-		
 		tween.tween_property(arm_slash,"position",arm_target_slash_start.position,0.02)
 		tween.tween_property(arm_slash,"position",arm_target_slash_mid.position,0.05)
 		tween.tween_property(arm_slash,"position",arm_target_slash_end.position,0.05)

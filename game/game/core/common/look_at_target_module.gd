@@ -2,10 +2,10 @@ extends Node
 class_name CommonLookAtTarget
 
 func look_at_target(aim, actor, weight: float):
-	var look_direction = Vector3(aim.global_position.x, actor.position.y, aim.global_position.z)
-	var xform: Transform3D = actor.transform # your transform
+	var look_direction = Vector3(aim.global_position.x, actor.global_position.y + 0.2, aim.global_position.z)
+	var xform: Transform3D = actor.global_transform # your transform
 	xform = xform.looking_at(look_direction,Vector3.UP)
-	actor.transform = actor.transform.interpolate_with(xform,weight)	
+	actor.global_transform = actor.global_transform.interpolate_with(xform,weight)	
 
 #func face_direction(direction, actor):
 	#if actor.transform.origin != actor.global_position + direction:

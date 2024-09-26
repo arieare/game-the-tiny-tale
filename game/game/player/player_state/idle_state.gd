@@ -2,8 +2,12 @@
 extends State
 
 func enter_state() -> void:
-	super()	
 	print(state_machine_parent.current_state.name)
+	var tween_arm_right = create_tween().set_trans(Tween.TRANS_BOUNCE)
+	var tween_arm_left = create_tween().set_trans(Tween.TRANS_BOUNCE)
+	tween_arm_right.tween_property(actor.body_right_arm,"position",actor.target_default_right_arm.position,0.05)
+	tween_arm_left.tween_property(actor.body_left_arm,"position",actor.target_default_left_arm.position,0.05)	
+	super()	
 
 	
 
@@ -18,4 +22,35 @@ func process_physics(delta: float) -> State:
 	actor.body.rotation_degrees.x = lerpf(actor.body.rotation_degrees.x,0,0.1)
 	actor.linear_velocity.x = lerpf(actor.linear_velocity.x,0,0.1)
 	actor.linear_velocity.z = lerpf(actor.linear_velocity.z,0,0.1)
+	
+	animate_breathe_idle(delta, 0.05)	
+	
 	return null
+
+
+var time = 0.0
+var frequence = 2.5 # sin speed 2.5
+var amplitude = 1.0 # value range
+var amount = 0.0
+var decay = 1.0
+var cycle: float = 0.0
+
+func bob(delta, frequence, amplitude):
+	amount = 1.0
+	time += delta
+	amount *= decay	
+	cycle = sin(time*frequence)*amplitude*amount
+	return cycle
+
+func animate_breathe_idle(delta, scale):
+	
+	if bob(delta, frequence, amplitude) < - amplitude + 0.1: #left
+		var tween = create_tween().set_trans(Tween.TRANS_SINE)
+		tween.tween_property(actor.body_torso,"position:y",actor.body_torso.position.y - scale,0.3)
+		var tween_head = create_tween().set_trans(Tween.TRANS_SINE)
+		tween_head.tween_property(actor.body_head,"position:y",actor.body_head.position.y - scale,0.5)		
+	if bob(delta, frequence, amplitude) > amplitude - 0.1: #right	
+		var tween = create_tween().set_trans(Tween.TRANS_SINE)
+		tween.tween_property(actor.body_torso,"position:y",actor.body_torso.position.y + scale,0.3)
+		var tween_head = create_tween().set_trans(Tween.TRANS_SINE)
+		tween_head.tween_property(actor.body_head,"position:y",actor.body_head.position.y + scale,0.5)	

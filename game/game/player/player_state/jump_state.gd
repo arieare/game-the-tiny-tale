@@ -5,7 +5,7 @@ func enter_state() -> void:
 	super()
 	print(state_machine_parent.current_state.name)
 	var tween = create_tween().set_trans(Tween.TRANS_BOUNCE)
-	tween.tween_property(actor.skin,"scale:y",1.2,0.1)
+	tween.tween_property(actor.skin,"scale:y",1.5,0.1)
 	tween.tween_property(actor.skin,"scale:z",1,0.1)	
 	actor.apply_central_impulse(Vector3.UP * 12 * actor.mass)	
 
@@ -15,7 +15,8 @@ func process_input(event: InputEvent) -> State:
 	return null
 
 func process_physics(delta: float) -> State:
-	print(actor.linear_velocity.y)
+	#var tween = create_tween().set_trans(Tween.TRANS_BOUNCE)
+	#tween.tween_property(actor.skin,"scale:y",1.0,0.5)
 	if actor.linear_velocity.y <= 9 and actor.position_state_machine.current_state.name == "on_air":
 		return state_machine_parent.state_dictionary["fall"]
 	return null

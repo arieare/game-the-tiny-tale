@@ -10,6 +10,12 @@ class_name PhysicsBasedPlayer
 @export var body:Node3D
 @export var body_head:Node3D
 @export var body_torso:MeshInstance3D
+
+@export var body_right_arm:MeshInstance3D
+@export var body_left_arm:MeshInstance3D
+@export var target_default_right_arm : Marker3D
+@export var target_default_left_arm : Marker3D
+
 @export var look_aim: MeshInstance3D
 
 ## List of movement node
@@ -28,17 +34,9 @@ func _unhandled_input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	movement_state_machine.process_frame(delta)
 	position_state_machine.process_frame(delta)
-	
-	var rotation_diff = body_head.rotation_degrees.y - body.rotation_degrees.y 
-	
-	root.common["look_at_target"].look_at_target(look_aim, body_head, 0.1)
-	root.common["look_at_target"].look_at_target(look_aim, body, 0.03)
 
-	
-	if rotation_diff > 10.0 or rotation_diff < -10.0:
-		is_head_rotate_too_far = true
-	elif rotation_diff < 10.0 or rotation_diff > -10.0:
-		is_head_rotate_too_far = false
+	root.common["look_at_target"].look_at_target(look_aim, body_head, 0.2)
+	root.common["look_at_target"].look_at_target(look_aim, body, 0.03)
 
 ## TODO
 # [ ] breathing idle

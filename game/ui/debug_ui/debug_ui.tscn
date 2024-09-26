@@ -34,10 +34,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_nplme")
 script = ExtResource("1_5qh6y")
-fragment_label = NodePath("MarginContainer/vbox/fragment_label")
-game_time_label = NodePath("MarginContainer/vbox/game_time_label")
+fragment_label = NodePath("margin_container/vbox/fragment_label")
+game_time_label = NodePath("margin_container/vbox/game_time_label")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="margin_container" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -49,10 +49,10 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="vbox" type="VBoxContainer" parent="MarginContainer"]
+[node name="vbox" type="VBoxContainer" parent="margin_container"]
 layout_mode = 2
 
-[node name="title" type="Label" parent="MarginContainer/vbox"]
+[node name="title" type="Label" parent="margin_container/vbox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -61,38 +61,38 @@ text = "the tiny tale"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="game_time_label" type="Label" parent="MarginContainer/vbox"]
+[node name="game_time_label" type="Label" parent="margin_container/vbox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "00:00:00"
 horizontal_alignment = 1
 
-[node name="check_float" type="CheckBox" parent="MarginContainer/vbox"]
+[node name="check_float" type="CheckBox" parent="margin_container/vbox"]
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "float body
 "
 
-[node name="check_bobbing_walk" type="CheckBox" parent="MarginContainer/vbox"]
+[node name="check_bobbing_walk" type="CheckBox" parent="margin_container/vbox"]
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "bobbing walk"
 
-[node name="check_feet" type="CheckBox" parent="MarginContainer/vbox"]
+[node name="check_feet" type="CheckBox" parent="margin_container/vbox"]
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "feet placement"
 
-[node name="fragment_label" type="Label" parent="MarginContainer/vbox"]
+[node name="fragment_label" type="Label" parent="margin_container/vbox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "◉ × 0"
 horizontal_alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="greyscale_filter" type="ColorRect" parent="."]
 visible = false
 material = SubResource("ShaderMaterial_nvo0i")
 layout_mode = 1
@@ -102,7 +102,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect2" type="ColorRect" parent="."]
+[node name="scanline_filter" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_5c1c8")
 layout_mode = 1
 anchors_preset = 15

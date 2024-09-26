@@ -6,7 +6,7 @@
 [resource]
 resource_local_to_scene = true
 shader = ExtResource("1_seg2a")
-shader_parameter/levels = 7
+shader_parameter/levels = 12
 shader_parameter/threshold = 0.1
 shader_parameter/colors = 4
 shader_parameter/pixelate = 1
