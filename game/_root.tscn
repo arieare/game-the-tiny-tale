@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://blu8emt5l7yex"]
+[gd_scene load_steps=11 format=3 uid="uid://blu8emt5l7yex"]
 
 [ext_resource type="Script" path="res://root.gd" id="1_owfvw"]
 [ext_resource type="Script" path="res://game/core/common/pid_controller_module.gd" id="2_bbwe3"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://game/core/common/event_bus_module.gd" id="5_f7ete"]
 [ext_resource type="PackedScene" uid="uid://brj8m71cptbtw" path="res://game/core/interaction/interaction_manager.tscn" id="6_ytl1l"]
 [ext_resource type="Script" path="res://game/core/common/mouse_ray_cast_module.gd" id="7_gyq80"]
+[ext_resource type="Script" path="res://game/core/common/look_at_target_module.gd" id="7_lsvol"]
 [ext_resource type="Script" path="res://game/core/common/scene_manager_module.gd" id="9_leehc"]
 
 [node name="root" type="Node"]
@@ -31,6 +32,9 @@ script = ExtResource("5_f7ete")
 script = ExtResource("5_ccuo1")
 
 [node name="interaction_manager" parent="common" instance=ExtResource("6_ytl1l")]
+
+[node name="look_at_target" type="Node" parent="common"]
+script = ExtResource("7_lsvol")
 
 [node name="mouse_ray_cast" type="Node" parent="common"]
 script = ExtResource("7_gyq80")

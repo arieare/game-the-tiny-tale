@@ -32,3 +32,7 @@ res://game/player/movement/movement_levitation.gd
 res://game/player/module/levitate_module.gd
 res://game/player/player_state/walk_state.gd
 res://game/player/movement/movement_jump.gd
+res://game/core/common/look_at_target_module.gd
+res://game/player/skill/skill_attack_melee.gd
+res://game/player/module/aim_cursor_module.gd
+res://game/player/movement/movement_bobbing.gd

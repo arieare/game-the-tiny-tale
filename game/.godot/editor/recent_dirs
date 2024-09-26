@@ -1,5 +1,6 @@
-res://game/player/player_state
 res://game/player/module
+res://game/core/common
+res://game/player/player_state
 res://content/shader
 res://content/material/
 res://content/texture

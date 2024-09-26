@@ -3,13 +3,9 @@ extends Node3D
 var parent: RigidBody3D
 
 #IK target
-@export var left_target_node: NodePath
-@export var right_target_node: NodePath
-@onready var left_target = get_node(left_target_node)
-@onready var right_target = get_node(right_target_node)
-
-@export var feet_ray_node: NodePath
-@onready var feet_ray:RayCast3D = get_node(feet_ray_node)
+@export var left_target:MeshInstance3D
+@export var right_target:MeshInstance3D
+@export var feet_ray:RayCast3D
 
 #Bobbing movement
 var step_magnitude:float = 14 # the bigger, the smaller step it is #12

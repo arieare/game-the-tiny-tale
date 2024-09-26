@@ -4,6 +4,9 @@ extends Node3D
 var skill_manager: Node
 #@export var hit_box : Area3D
 @export var vfx_slash : GPUParticles3D
+@export var arm_slash : MeshInstance3D
+@export var arm_target_slash : Marker3D
+@export var arm_target_default : Marker3D
 @export var hit_box:Area3D
 
 func _ready():
@@ -21,9 +24,15 @@ func slash():
 	hit_box.position.z += 0.2
 	root.cam.cam_feature["cam_shake"].shake(0.075)
 	print("slash")
+	var tween = create_tween().set_trans(Tween.TRANS_BOUNCE)
 	if vfx_slash:
 		vfx_slash.emitting = true
+		
+		tween.tween_property(arm_slash,"position",arm_target_slash.position,0.1)
+		tween.tween_property(arm_slash,"position",arm_target_default.position,0.1)
 	await get_tree().create_timer(0.02).timeout
+	
+
 	hit_box.monitorable = false
 	hit_box.monitoring = false
 	hit_box.position.z -= 0.2

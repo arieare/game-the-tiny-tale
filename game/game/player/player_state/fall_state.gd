@@ -20,11 +20,11 @@ func process_physics(delta: float) -> State:
 func exit_state() -> void:
 	super()
 	var tween = create_tween().set_trans(Tween.TRANS_BOUNCE)
-	tween.tween_property(actor.body,"scale:y",0.75,0.05)
-	tween.tween_property(actor.body,"scale:z",1.3,0.01)
-	tween.tween_property(actor.body,"scale:x",1.3,0.01)
+	tween.tween_property(actor.skin,"scale:y",0.75,0.05)
+	tween.tween_property(actor.skin,"scale:z",1.3,0.01)
+	tween.tween_property(actor.skin,"scale:x",1.3,0.01)
 	await tween.finished
 	var tween_recover = create_tween().set_trans(Tween.TRANS_BOUNCE)
-	tween_recover.tween_property(actor.body,"scale:y",1.0,0.05)
-	tween_recover.tween_property(actor.body,"scale:z",1,0.05)
-	tween_recover.tween_property(actor.body,"scale:x",1,0.05)
+	tween_recover.tween_property(actor.skin,"scale:y",1.0,0.05)
+	tween_recover.tween_property(actor.skin,"scale:z",1,0.05)
+	tween_recover.tween_property(actor.skin,"scale:x",1,0.05)
