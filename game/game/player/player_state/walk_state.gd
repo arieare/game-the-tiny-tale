@@ -70,16 +70,16 @@ func bob(delta, frequence, amplitude):
 
 func animate_hand_walk(delta, scale):
 	
-	if bob(delta, frequence, amplitude) < - amplitude + 0.1: #left
+	if bob(delta, frequence, amplitude) < - amplitude + 0.1:
 		var tween_right_arm = create_tween().set_trans(Tween.TRANS_SINE)
 		tween_right_arm.tween_property(actor.body_right_arm,"position:z", scale ,0.1)
 		
 		var tween_left_arm = create_tween().set_trans(Tween.TRANS_SINE)
 		tween_left_arm.tween_property(actor.body_left_arm,"position:z", - scale , 0.2)		
 	
-	if bob(delta, frequence, amplitude) > amplitude - 0.1: #right
-		var tween_right_arm = create_tween().set_trans(Tween.TRANS_SINE)
-		tween_right_arm.tween_property(actor.body_right_arm,"position:z", -scale ,0.2)
-		
+	if bob(delta, frequence, amplitude) > amplitude - 0.1:		
 		var tween_left_arm = create_tween().set_trans(Tween.TRANS_SINE)
 		tween_left_arm.tween_property(actor.body_left_arm,"position:z", scale , 0.1)		
+
+		var tween_right_arm = create_tween().set_trans(Tween.TRANS_SINE)
+		tween_right_arm.tween_property(actor.body_right_arm,"position:z", -scale ,0.2)

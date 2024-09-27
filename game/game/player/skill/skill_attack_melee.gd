@@ -29,19 +29,23 @@ func slash():
 	hit_box.position.z += 0.2
 	root.cam.cam_feature["cam_shake"].shake(0.075)
 	print("slash")
-	var tween = create_tween().set_trans(Tween.TRANS_BOUNCE)
-	var tween_left = create_tween().set_trans(Tween.TRANS_BOUNCE)
+
 	if vfx_slash:
 		vfx_slash.emitting = true
-		tween.tween_property(arm_slash,"position",arm_target_slash_start.position,0.02)
-		tween.tween_property(arm_slash,"position",arm_target_slash_mid.position,0.05)
-		tween.tween_property(arm_slash,"position",arm_target_slash_end.position,0.05)
-		tween.tween_property(arm_slash,"position",arm_target_default_right.position,0.2)
-		tween_left.tween_property(arm_left,"position",arm_target_slash_left.position,0.1)
-		tween_left.tween_property(arm_left,"position",arm_target_default_left.position,0.3)
+		animate_slash_attack()
+	
 	await get_tree().create_timer(0.02).timeout
 	
-
 	hit_box.monitorable = false
 	hit_box.monitoring = false
 	hit_box.position.z -= 0.2
+
+func animate_slash_attack():
+	var tween = create_tween().set_trans(Tween.TRANS_BOUNCE)
+	var tween_left = create_tween().set_trans(Tween.TRANS_BOUNCE)	
+	tween.tween_property(arm_slash,"position",arm_target_slash_start.position,0.02)
+	tween.tween_property(arm_slash,"position",arm_target_slash_mid.position,0.05)
+	tween.tween_property(arm_slash,"position",arm_target_slash_end.position,0.05)
+	tween.tween_property(arm_slash,"position",arm_target_default_right.position,0.2)
+	tween_left.tween_property(arm_left,"position",arm_target_slash_left.position,0.1)
+	tween_left.tween_property(arm_left,"position",arm_target_default_left.position,0.3)	

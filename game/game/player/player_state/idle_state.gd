@@ -23,33 +23,20 @@ func process_physics(delta: float) -> State:
 	actor.linear_velocity.x = lerpf(actor.linear_velocity.x,0,0.1)
 	actor.linear_velocity.z = lerpf(actor.linear_velocity.z,0,0.1)
 	
-	animate_breathe_idle(delta, 0.05)	
+	animate_breathe_idle(delta, 0.07)	
 	
 	return null
 
 
-var time = 0.0
-var frequence = 2.5 # sin speed 2.5
-var amplitude = 1.0 # value range
-var amount = 0.0
-var decay = 1.0
-var cycle: float = 0.0
-
-func bob(delta, frequence, amplitude):
-	amount = 1.0
-	time += delta
-	amount *= decay	
-	cycle = sin(time*frequence)*amplitude*amount
-	return cycle
-
 func animate_breathe_idle(delta, scale):
-	
-	if bob(delta, frequence, amplitude) < - amplitude + 0.1: #left
+	var frequence = 2.5 # sin speed 2.5
+	var amplitude = 1.0 # value range=
+	if actor.root.common["bob_sine"].cycle(delta, frequence, amplitude) < - amplitude + 0.1: #left
 		var tween = create_tween().set_trans(Tween.TRANS_SINE)
 		tween.tween_property(actor.body_torso,"position:y",actor.body_torso.position.y - scale,0.3)
 		var tween_head = create_tween().set_trans(Tween.TRANS_SINE)
 		tween_head.tween_property(actor.body_head,"position:y",actor.body_head.position.y - scale,0.5)		
-	if bob(delta, frequence, amplitude) > amplitude - 0.1: #right	
+	if actor.root.common["bob_sine"].cycle(delta, frequence, amplitude) > amplitude - 0.1: #right	
 		var tween = create_tween().set_trans(Tween.TRANS_SINE)
 		tween.tween_property(actor.body_torso,"position:y",actor.body_torso.position.y + scale,0.3)
 		var tween_head = create_tween().set_trans(Tween.TRANS_SINE)

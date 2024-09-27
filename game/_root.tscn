@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://blu8emt5l7yex"]
+[gd_scene load_steps=12 format=3 uid="uid://blu8emt5l7yex"]
 
 [ext_resource type="Script" path="res://root.gd" id="1_owfvw"]
 [ext_resource type="Script" path="res://game/core/common/pid_controller_module.gd" id="2_bbwe3"]
 [ext_resource type="Script" path="res://app/app.gd" id="2_prex2"]
+[ext_resource type="Script" path="res://game/core/common/bob_sine_module.gd" id="3_w0mu2"]
 [ext_resource type="Script" path="res://game/core/common/day_time_module.gd" id="4_tavwi"]
 [ext_resource type="Script" path="res://game/core/common/input_map_module.gd" id="5_ccuo1"]
 [ext_resource type="Script" path="res://game/core/common/event_bus_module.gd" id="5_f7ete"]
@@ -21,6 +22,9 @@ script = ExtResource("2_prex2")
 [node name="game" type="Node" parent="."]
 
 [node name="common" type="Node" parent="."]
+
+[node name="bob_sine" type="Node" parent="common"]
+script = ExtResource("3_w0mu2")
 
 [node name="day_time" type="Node" parent="common"]
 script = ExtResource("4_tavwi")

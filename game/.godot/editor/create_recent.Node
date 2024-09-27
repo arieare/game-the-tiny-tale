@@ -1,8 +1,8 @@
+Node
 MeshInstance3D
 Node3D
 Marker3D
 Skeleton3D
-Node
 RemoteTransform3D
 CollisionShape3D
 Area3D

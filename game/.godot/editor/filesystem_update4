@@ -20,3 +20,5 @@ res://game/player/player_state/walk_state.gd
 res://game/player/player_state/jump_state.gd
 res://game/player/module/levitate_module.gd
 res://game/player/skill/skill_attack_melee.gd
+res://game/core/common/mouse_ray_cast_module.gd
+res://game/core/common/bob_sine_module.gd
