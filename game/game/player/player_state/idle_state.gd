@@ -2,7 +2,6 @@
 extends State
 
 func enter_state() -> void:
-	print(state_machine_parent.current_state.name)
 	var tween_arm_right = create_tween().set_trans(Tween.TRANS_BOUNCE)
 	var tween_arm_left = create_tween().set_trans(Tween.TRANS_BOUNCE)
 	tween_arm_right.tween_property(actor.body_right_arm,"position",actor.target_default_right_arm.position,0.05)
@@ -15,7 +14,8 @@ func process_input(event: InputEvent) -> State:
 	if actor.player_input.want_to_jump() and actor.position_state_machine.current_state.name == "on_ground":
 		return state_machine_parent.state_dictionary["jump"]
 	if actor.player_input.get_direction() != Vector3.ZERO and actor.position_state_machine.current_state.name == "on_ground":
-		return state_machine_parent.state_dictionary["walk"]		
+		return state_machine_parent.state_dictionary["walk"]
+
 	return null
 
 func process_physics(delta: float) -> State:
@@ -24,6 +24,9 @@ func process_physics(delta: float) -> State:
 	actor.linear_velocity.z = lerpf(actor.linear_velocity.z,0,0.1)
 	
 	animate_breathe_idle(delta, 0.07)	
+	
+	if actor.skill_state_machine.current_state.name == "range" and actor.skill_state_machine.current_state.current_projectile != null and actor.player_input.want_to_warp():
+		return state_machine_parent.state_dictionary["warp"]	
 	
 	return null
 

@@ -7,12 +7,11 @@
 
 [node name="cam" type="Node3D"]
 script = ExtResource("1_803c3")
-cam_offset_z = 17.0
-cam_fov = 100
 
 [node name="cam" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 12, 12)
-fov = 100.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+size = 30.0
+near = 0.001
 
 [node name="cam_shake" type="Node" parent="cam"]
 script = ExtResource("2_wyfii")

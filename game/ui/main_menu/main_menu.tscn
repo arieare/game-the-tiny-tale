@@ -42,15 +42,21 @@ theme_override_constants/margin_bottom = 48
 
 [node name="vbox" type="VBoxContainer" parent="marginbox"]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 60
 
-[node name="game_title" type="Label" parent="marginbox/vbox"]
+[node name="serie_title" type="Label" parent="marginbox/vbox"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 96
+theme_override_font_sizes/font_size = 48
 text = "the tiny tale
 "
+horizontal_alignment = 1
+
+[node name="game_title2" type="Label" parent="marginbox/vbox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 86
+text = "MADSKIPPER ADVENTURE"
 
 [node name="vbox" type="VBoxContainer" parent="marginbox/vbox"]
 layout_mode = 2
@@ -58,33 +64,30 @@ theme_override_constants/separation = 24
 
 [node name="start_btn" type="Button" parent="marginbox/vbox/vbox"]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 32
 text = "start"
-alignment = 0
 
 [node name="option_btn" type="Button" parent="marginbox/vbox/vbox"]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 32
 text = "option"
-alignment = 0
 
 [node name="credit_btn" type="Button" parent="marginbox/vbox/vbox"]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 32
 text = "credit"
-alignment = 0
 
 [node name="quit_btn" type="Button" parent="marginbox/vbox/vbox"]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 32
 text = "quit"
-alignment = 0
 
 [node name="copyright" type="Label" parent="marginbox/vbox"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
 text = "a game by jestersuitgame / @arieare"
+horizontal_alignment = 1

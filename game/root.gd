@@ -71,7 +71,6 @@ func _ready() -> void:
 	root_node["ui"].add_child(ui_node.main_menu.instantiate())
 	root_node["game"].call_deferred("add_child",game_node.prototype.instantiate())
 
-
 ## Global variable
 # Game State
 enum GAME_STATE {START, RUNNING, PAUSE, OVER}

@@ -1,6 +1,10 @@
 extends Node
 class_name CommonDayTime
 
+'''
+process the gametime, return the day time, and manipulate the sun according to the day time.
+'''
+
 @export_range(0,59) var second: int = 0
 @export_range(0,59) var minute: int = 0
 @export_range(0,24) var hour: int = 0 : set = _set_starting_hour

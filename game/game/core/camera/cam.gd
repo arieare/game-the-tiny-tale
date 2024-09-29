@@ -18,16 +18,17 @@ func init_modules():
 	cam_filter.assert_cam_parent(self)
 
 ## Camera Setting
-@export var cam_offset_y: float = 8.0
-@export var cam_offset_z: float = 12.0
-@export var cam_fov = 80
-@export var cam_rotation = -10
+var cam_offset_y: float = 18.0
+var cam_offset_z: float = 15.0
+var cam_fov = 75
+var cam_rotation = -30
 var cam_offset = Vector3(0, cam_offset_y, cam_offset_z)
 
 func cam_setting():
 	cam_child.fov = cam_fov
 	cam_child.position = cam_offset
 	cam_child.rotation_degrees.x = cam_rotation	
+	#cam_child.rotation_degrees.y = cam_rotation_y
 
 func register_self_to_root():
 	root.cam = self

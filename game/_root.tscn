@@ -14,7 +14,7 @@
 
 [node name="root" type="Node"]
 script = ExtResource("1_owfvw")
-starting_hour = 6
+starting_hour = 16
 
 [node name="app" type="Node" parent="."]
 script = ExtResource("2_prex2")
@@ -28,6 +28,7 @@ script = ExtResource("3_w0mu2")
 
 [node name="day_time" type="Node" parent="common"]
 script = ExtResource("4_tavwi")
+tick_per_second = 1000
 
 [node name="event_bus" type="Node" parent="common"]
 script = ExtResource("5_f7ete")

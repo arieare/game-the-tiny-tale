@@ -6,7 +6,10 @@ var pixel_outline_filter = preload("res://content/material/pixel_outline.tres")
 var dither_filter = preload("res://content/material/dither.tres")
 var pixel_size = 1
 
+var pixel_subviewport
+
 func init_pixelart_outline(_material:Resource):
+	pass
 	## Mesh Renderer
 	if is_style_enabled:
 		var plane_mesh = QuadMesh.new()
@@ -36,7 +39,7 @@ func init_pixelart_style(_root:Node, _material:Resource):
 		pixel_viewport.material = _material
 		_root.add_child.call_deferred(pixel_viewport)
 		
-		var pixel_subviewport = SubViewport.new()
+		pixel_subviewport = SubViewport.new()
 		pixel_subviewport.name = "pixel_sub_viewport"
 		pixel_subviewport.handle_input_locally = false
 		pixel_subviewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS

@@ -19,3 +19,15 @@ func want_to_jump() -> bool:
 
 func want_to_attack() -> bool:
 	return Input.is_action_just_pressed("attack")
+
+func want_to_warp() -> bool:
+	return Input.is_action_just_pressed("warp")
+
+func want_to_finish_warp() -> bool:
+	return Input.is_action_just_released("warp")
+
+func want_to_finish_attack() -> bool:
+	return Input.is_action_just_released("attack")	
+
+func want_to_switch_weapon() -> bool:
+	return Input.is_action_just_pressed("switch_weapon")

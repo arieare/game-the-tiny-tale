@@ -1,21 +1,17 @@
-[gd_scene load_steps=54 format=3 uid="uid://dn0h6w1278b6y"]
+[gd_scene load_steps=58 format=3 uid="uid://dn0h6w1278b6y"]
 
 [ext_resource type="Script" path="res://game/player/player_controller.gd" id="1_wrxx6"]
 [ext_resource type="Script" path="res://game/player/player_input.gd" id="2_7eeft"]
 [ext_resource type="Script" path="res://game/player/module/ground_check_module.gd" id="2_8bli5"]
 [ext_resource type="Script" path="res://game/player/module/ground_ray_cast.gd" id="2_smlu1"]
 [ext_resource type="Script" path="res://game/player/module/levitate_module.gd" id="4_rpndc"]
-[ext_resource type="Script" path="res://game/player/movement/movement_upright.gd" id="5_eisyv"]
-[ext_resource type="Script" path="res://game/player/movement/movement_jump.gd" id="7_4p8vc"]
 [ext_resource type="Script" path="res://game/player/movement/movement_bobbing.gd" id="8_dve63"]
-[ext_resource type="Script" path="res://game/player/skill/skill.gd" id="10_3lyut"]
-[ext_resource type="Script" path="res://game/player/skill/SkillShooting.gd" id="11_hjimd"]
-[ext_resource type="Script" path="res://game/player/skill/skill_attack_melee.gd" id="12_dv8mq"]
-[ext_resource type="Script" path="res://game/player/weapons/RangeWeapon.gd" id="13_g6rl3"]
+[ext_resource type="PackedScene" uid="uid://ue41weqbhwmi" path="res://content/vfx/warp_start_vfx.tscn" id="9_2w26g"]
 [ext_resource type="Shader" path="res://content/shader/glass.gdshader" id="13_hwtq7"]
 [ext_resource type="PackedScene" uid="uid://bqxe1645pw8ku" path="res://game/player/weapons/projectile.tscn" id="14_8673b"]
-[ext_resource type="PackedScene" uid="uid://b2c3ojnu6xfo7" path="res://content/vfx/vfx_running_dust.tscn" id="15_bkycr"]
-[ext_resource type="PackedScene" uid="uid://dcayiboph0oe6" path="res://content/vfx/vfx_slash.tscn" id="16_enbpp"]
+[ext_resource type="PackedScene" uid="uid://b2c3ojnu6xfo7" path="res://content/vfx/running_dust_vfx.tscn" id="15_bkycr"]
+[ext_resource type="PackedScene" uid="uid://dcayiboph0oe6" path="res://content/vfx/slash_vfx.tscn" id="16_enbpp"]
+[ext_resource type="Script" path="res://game/player/player_state/warp_state.gd" id="17_5og5j"]
 [ext_resource type="Script" path="res://game/player/module/aim_cursor_module.gd" id="17_8ya1a"]
 [ext_resource type="Script" path="res://game/player/player_state/movement_state_machine.gd" id="18_n6nuk"]
 [ext_resource type="Script" path="res://game/player/player_state/idle_state.gd" id="18_yj4js"]
@@ -24,77 +20,19 @@
 [ext_resource type="Script" path="res://game/player/player_state/fall_state.gd" id="21_hdg3a"]
 [ext_resource type="Script" path="res://game/player/player_state/walk_state.gd" id="21_nucca"]
 [ext_resource type="Script" path="res://game/player/player_state/position_state_machine.gd" id="23_x3smm"]
+[ext_resource type="Script" path="res://game/player/player_state/skill_state_machine.gd" id="24_2gqg8"]
 [ext_resource type="Script" path="res://game/player/player_state/on_air_state.gd" id="24_ift68"]
+[ext_resource type="Script" path="res://game/player/player_state/melee_state.gd" id="25_pqlhu"]
+[ext_resource type="Script" path="res://game/player/player_state/range_state.gd" id="26_3grhu"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i1yth"]
 radius = 0.25
 height = 0.75
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_xbxn2"]
-radius = 2.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x7qyu"]
-diffuse_mode = 3
-albedo_color = Color(0.143, 0.16055, 0.26, 1)
-roughness = 0.0
-
-[sub_resource type="SphereMesh" id="SphereMesh_d8rtc"]
-material = SubResource("StandardMaterial3D_x7qyu")
-radius = 0.3
-height = 0.6
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0nwyf"]
-render_priority = 0
-shader = ExtResource("13_hwtq7")
-shader_parameter/albedo = Color(0.414, 0.726033, 0.92, 0.133333)
-shader_parameter/roughness = 0.15
-shader_parameter/normal_strength = 1.0
-shader_parameter/edge_color = Color(0.682353, 0.733333, 0, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_ydgfx"]
-material = SubResource("ShaderMaterial_0nwyf")
-radius = 0.6
-height = 1.2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n8723"]
-diffuse_mode = 3
-albedo_color = Color(1, 0, 0, 1)
-roughness = 0.0
-emission_enabled = true
-emission = Color(0.894846, 0, 0.327938, 1)
-emission_energy_multiplier = 1.95
-
-[sub_resource type="SphereMesh" id="SphereMesh_ce7m5"]
-material = SubResource("StandardMaterial3D_n8723")
-radius = 0.06
-height = 0.12
-radial_segments = 12
-rings = 8
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d2dv0"]
-shading_mode = 0
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_rycxo"]
-material = SubResource("StandardMaterial3D_d2dv0")
-radius = 0.1
-height = 0.4
-radial_segments = 12
-
-[sub_resource type="SphereMesh" id="SphereMesh_ggbyi"]
-material = SubResource("StandardMaterial3D_x7qyu")
-radius = 0.25
-height = 0.1
-radial_segments = 12
-is_hemisphere = true
-
-[sub_resource type="SphereMesh" id="SphereMesh_adauk"]
-material = SubResource("StandardMaterial3D_d2dv0")
-radius = 0.25
-height = 0.44
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vbdkw"]
-shading_mode = 0
+diffuse_mode = 3
 albedo_color = Color(0.2575, 1, 0.19, 1)
+roughness = 0.0
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_0a3lm"]
 material = SubResource("StandardMaterial3D_vbdkw")
@@ -112,14 +50,108 @@ material = SubResource("StandardMaterial3D_vloh5")
 radius = 0.2
 height = 0.05
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0nwyf"]
+render_priority = 0
+shader = ExtResource("13_hwtq7")
+shader_parameter/albedo = Color(0.414, 0.726033, 0.92, 0.0784314)
+shader_parameter/roughness = 0.15
+shader_parameter/normal_strength = 1.0
+shader_parameter/edge_color = Color(0.858667, 0.184, 0.92, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ydgfx"]
+material = SubResource("ShaderMaterial_0nwyf")
+radius = 0.7
+height = 1.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x7qyu"]
+diffuse_mode = 3
+albedo_color = Color(0.143, 0.16055, 0.26, 1)
+roughness = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_d8rtc"]
+material = SubResource("StandardMaterial3D_x7qyu")
+radius = 0.3
+height = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d2dv0"]
+diffuse_mode = 3
+roughness = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_adauk"]
+material = SubResource("StandardMaterial3D_d2dv0")
+radius = 0.25
+height = 0.5
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_viyto"]
 shading_mode = 0
 albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_v1u5a"]
 material = SubResource("StandardMaterial3D_viyto")
-radius = 0.04
+radius = 0.06
 height = 0.01
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n8723"]
+diffuse_mode = 3
+albedo_color = Color(1, 0, 0, 1)
+roughness = 0.0
+emission_enabled = true
+emission = Color(0.894846, 0, 0.327938, 1)
+emission_energy_multiplier = 1.95
+
+[sub_resource type="SphereMesh" id="SphereMesh_ce7m5"]
+material = SubResource("StandardMaterial3D_n8723")
+radius = 0.05
+height = 0.1
+radial_segments = 12
+rings = 8
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_rycxo"]
+material = SubResource("StandardMaterial3D_d2dv0")
+radius = 0.1
+height = 0.4
+radial_segments = 12
+
+[sub_resource type="SphereMesh" id="SphereMesh_ggbyi"]
+material = SubResource("StandardMaterial3D_x7qyu")
+radius = 0.25
+height = 0.1
+radial_segments = 12
+is_hemisphere = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_84ewr"]
+diffuse_mode = 3
+albedo_color = Color(0.143, 0.16055, 0.26, 1)
+roughness = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_4n1h5"]
+material = SubResource("StandardMaterial3D_84ewr")
+radius = 0.2
+height = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mrkwq"]
+diffuse_mode = 3
+albedo_color = Color(0.143, 0.16055, 0.26, 1)
+roughness = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_rm5ma"]
+material = SubResource("StandardMaterial3D_mrkwq")
+radius = 0.15
+height = 0.1
+radial_segments = 12
+is_hemisphere = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kd057"]
+diffuse_mode = 3
+albedo_color = Color(0.143, 0.16055, 0.26, 1)
+roughness = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_no72p"]
+material = SubResource("StandardMaterial3D_kd057")
+radius = 0.15
+height = 0.1
+radial_segments = 12
+is_hemisphere = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b27o8"]
 emission_enabled = true
@@ -149,12 +181,6 @@ material = SubResource("StandardMaterial3D_yw7ja")
 radius = 0.2
 height = 0.4
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_v3es2"]
-material = SubResource("StandardMaterial3D_x7qyu")
-top_radius = 0.01
-bottom_radius = 0.03
-height = 1.0
-
 [sub_resource type="SphereMesh" id="SphereMesh_5yddk"]
 material = SubResource("StandardMaterial3D_yw7ja")
 radius = 0.15
@@ -165,6 +191,12 @@ material = SubResource("StandardMaterial3D_x7qyu")
 radius = 0.15
 height = 0.3
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_v3es2"]
+material = SubResource("StandardMaterial3D_x7qyu")
+top_radius = 0.01
+bottom_radius = 0.03
+height = 1.0
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tpgop"]
 shading_mode = 0
 albedo_color = Color(1, 0, 0, 1)
@@ -174,7 +206,7 @@ albedo_texture_force_srgb = true
 material = SubResource("StandardMaterial3D_tpgop")
 size = Vector3(0.2, 0.2, 0.2)
 
-[node name="player" type="RigidBody3D" node_paths=PackedStringArray("collider", "ray", "skin", "body", "body_head", "body_torso", "body_right_arm", "body_left_arm", "target_default_right_arm", "target_default_left_arm", "look_aim", "move_bobbing", "move_upright", "player_input", "movement_state_machine", "position_state_machine") groups=["player"]]
+[node name="player" type="RigidBody3D" node_paths=PackedStringArray("collider", "ray", "skin", "body", "body_head", "body_torso", "body_right_arm", "body_left_arm", "target_default_right_arm", "target_default_left_arm", "look_aim", "move_bobbing", "player_input", "movement_state_machine", "position_state_machine", "skill_state_machine", "slash_vfx", "running_dust_vfx", "warp_start_vfx") groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 collision_layer = 2
 center_of_mass_mode = 1
@@ -193,10 +225,13 @@ target_default_right_arm = NodePath("skin/body/arm/arm_target/target_default_rig
 target_default_left_arm = NodePath("skin/body/arm/arm_target/target_default_left")
 look_aim = NodePath("controller/aim_cursor/pointer")
 move_bobbing = NodePath("movement/bobbing")
-move_upright = NodePath("movement/upright")
 player_input = NodePath("controller/input")
 movement_state_machine = NodePath("controller/movement_state_machine")
 position_state_machine = NodePath("controller/position_state_machine")
+skill_state_machine = NodePath("controller/skill_state_machine")
+slash_vfx = NodePath("skin/body/vfx/slash_vfx")
+running_dust_vfx = NodePath("skin/body/vfx/running_dust_vfx")
+warp_start_vfx = NodePath("skin/body/vfx/aposition/warp_start_vfx")
 
 [node name="collider" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_i1yth")
@@ -212,97 +247,15 @@ script = ExtResource("4_rpndc")
 
 [node name="movement" type="Node3D" parent="."]
 
-[node name="upright" type="Node" parent="movement"]
-script = ExtResource("5_eisyv")
-
 [node name="bobbing" type="Node3D" parent="movement" node_paths=PackedStringArray("left_target", "right_target", "feet_ray")]
 script = ExtResource("8_dve63")
-left_target = NodePath("../../skin/body/foot_ik_target/left_target")
-right_target = NodePath("../../skin/body/foot_ik_target/right_target")
-feet_ray = NodePath("../../skin/body/feet_ray")
-
-[node name="jump" type="Node" parent="movement"]
-script = ExtResource("7_4p8vc")
-
-[node name="skill" type="Node3D" parent="."]
-script = ExtResource("10_3lyut")
-
-[node name="SkillAttackRange" type="Node" parent="skill"]
-script = ExtResource("11_hjimd")
-
-[node name="WeaponRange" type="Node3D" parent="skill/SkillAttackRange"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 6.29295, -0.5)
-
-[node name="ScriptRangeWeapon" type="Node" parent="skill/SkillAttackRange/WeaponRange" node_paths=PackedStringArray("nock")]
-script = ExtResource("13_g6rl3")
-projectile = ExtResource("14_8673b")
-nock = NodePath("../Nock")
-
-[node name="Aim" type="Marker3D" parent="skill/SkillAttackRange/WeaponRange"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.08165e-12, -1, 0.5)
-
-[node name="Nock" type="Marker3D" parent="skill/SkillAttackRange/WeaponRange"]
-
-[node name="skill_attack_melee" type="Node3D" parent="skill" node_paths=PackedStringArray("vfx_slash", "arm_slash", "arm_left", "arm_target_slash_start", "arm_target_slash_mid", "arm_target_slash_end", "arm_target_slash_left", "arm_target_default_right", "arm_target_default_left", "hit_box")]
-script = ExtResource("12_dv8mq")
-vfx_slash = NodePath("../../skin/body/vfx/vfx_slash")
-arm_slash = NodePath("../../skin/body/arm/right_arm")
-arm_left = NodePath("../../skin/body/arm/left_arm")
-arm_target_slash_start = NodePath("../../skin/body/arm/arm_target/target_slash/target_slash_start")
-arm_target_slash_mid = NodePath("../../skin/body/arm/arm_target/target_slash/target_slash_mid")
-arm_target_slash_end = NodePath("../../skin/body/arm/arm_target/target_slash/target_slash_end")
-arm_target_slash_left = NodePath("../../skin/body/arm/arm_target/target_slash/target_slash_left")
-arm_target_default_right = NodePath("../../skin/body/arm/arm_target/target_default_right")
-arm_target_default_left = NodePath("../../skin/body/arm/arm_target/target_default_left")
-hit_box = NodePath("weapon_melee/hit_box")
-
-[node name="weapon_melee" type="Node3D" parent="skill/skill_attack_melee"]
-
-[node name="hit_box" type="Area3D" parent="skill/skill_attack_melee/weapon_melee"]
-collision_layer = 128
-collision_mask = 64
-
-[node name="collision" type="CollisionShape3D" parent="skill/skill_attack_melee/weapon_melee/hit_box"]
-shape = SubResource("SphereShape3D_xbxn2")
+left_target = NodePath("../../skin/body/feet/left_target")
+right_target = NodePath("../../skin/body/feet/right_target")
+feet_ray = NodePath("../../skin/body/feet/feet_ray")
 
 [node name="skin" type="Node3D" parent="."]
 
 [node name="head" type="Node3D" parent="skin"]
-
-[node name="head" type="MeshInstance3D" parent="skin/head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.686566, 0)
-mesh = SubResource("SphereMesh_d8rtc")
-skeleton = NodePath("../../root/@EditorNode@17030/@Panel@13/@VBoxContainer@14/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@25/DockVSplitCenter/@VSplitContainer@52/@VBoxContainer@53/@PanelContainer@98/MainScreen/@CanvasItemEditor@9331/@VSplitContainer@9153/@HSplitContainer@9155/@HSplitContainer@9157/@Control@9158/@SubViewportContainer@9159/@SubViewport@9160/player/body")
-
-[node name="helmet" type="MeshInstance3D" parent="skin/head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.892723, -0.0364833)
-mesh = SubResource("SphereMesh_ydgfx")
-skeleton = NodePath("../../root/@EditorNode@17030/@Panel@13/@VBoxContainer@14/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@25/DockVSplitCenter/@VSplitContainer@52/@VBoxContainer@53/@PanelContainer@98/MainScreen/@CanvasItemEditor@9331/@VSplitContainer@9153/@HSplitContainer@9155/@HSplitContainer@9157/@Control@9158/@SubViewportContainer@9159/@SubViewport@9160/player/body")
-
-[node name="nose" type="MeshInstance3D" parent="skin/head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.620752, -0.436995)
-mesh = SubResource("SphereMesh_ce7m5")
-skeleton = NodePath("../beak")
-
-[node name="beak" type="MeshInstance3D" parent="skin/head"]
-transform = Transform3D(1, 0, 0, 0, 0.173648, 0.984808, 0, -0.984808, 0.173648, 0, 0.537359, -0.233362)
-mesh = SubResource("CapsuleMesh_rycxo")
-skeleton = NodePath("../../root/@EditorNode@17030/@Panel@13/@VBoxContainer@14/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@25/DockVSplitCenter/@VSplitContainer@52/@VBoxContainer@53/@PanelContainer@98/MainScreen/@CanvasItemEditor@9331/@VSplitContainer@9153/@HSplitContainer@9155/@HSplitContainer@9157/@Control@9158/@SubViewportContainer@9159/@SubViewport@9160/player/body")
-
-[node name="ear_left" type="MeshInstance3D" parent="skin/head"]
-transform = Transform3D(0.866026, -0.482963, 0.12941, 0, 0.258819, 0.965926, -0.5, -0.836516, 0.224144, -0.35, 1, 0.075)
-mesh = SubResource("SphereMesh_ggbyi")
-skeleton = NodePath("../../root/@EditorNode@17030/@Panel@13/@VBoxContainer@14/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@25/DockVSplitCenter/@VSplitContainer@52/@VBoxContainer@53/@PanelContainer@98/MainScreen/@CanvasItemEditor@9331/@VSplitContainer@9153/@HSplitContainer@9155/@HSplitContainer@9157/@Control@9158/@SubViewportContainer@9159/@SubViewport@9160/player/body")
-
-[node name="ear_right" type="MeshInstance3D" parent="skin/head"]
-transform = Transform3D(0.866026, 0.482963, -0.12941, 0, 0.258819, 0.965926, 0.5, -0.836516, 0.224144, 0.35, 1, 0.075)
-mesh = SubResource("SphereMesh_ggbyi")
-skeleton = NodePath("../../root/@EditorNode@17030/@Panel@13/@VBoxContainer@14/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@25/DockVSplitCenter/@VSplitContainer@52/@VBoxContainer@53/@PanelContainer@98/MainScreen/@CanvasItemEditor@9331/@VSplitContainer@9153/@HSplitContainer@9155/@HSplitContainer@9157/@Control@9158/@SubViewportContainer@9159/@SubViewport@9160/player/body")
-
-[node name="face" type="MeshInstance3D" parent="skin/head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.686035, -0.0814021)
-mesh = SubResource("SphereMesh_adauk")
-skeleton = NodePath("../../root/@EditorNode@17030/@Panel@13/@VBoxContainer@14/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@25/DockVSplitCenter/@VSplitContainer@52/@VBoxContainer@53/@PanelContainer@98/MainScreen/@CanvasItemEditor@9331/@VSplitContainer@9153/@HSplitContainer@9155/@HSplitContainer@9157/@Control@9158/@SubViewportContainer@9159/@SubViewport@9160/player/body")
 
 [node name="hat" type="Node3D" parent="skin/head"]
 transform = Transform3D(1, 0, 0, 0, 0.944674, -0.328009, 0, 0.328009, 0.944674, 0, 1.69564, 0.270491)
@@ -314,16 +267,90 @@ mesh = SubResource("CylinderMesh_0a3lm")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.141607, 0)
 mesh = SubResource("SphereMesh_ymmc7")
 
-[node name="eye" type="Node3D" parent="skin/head"]
+[node name="helmet" type="MeshInstance3D" parent="skin/head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.892723, 0.00108908)
+mesh = SubResource("SphereMesh_ydgfx")
+skeleton = NodePath("../../root/@EditorNode@17030/@Panel@13/@VBoxContainer@14/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@25/DockVSplitCenter/@VSplitContainer@52/@VBoxContainer@53/@PanelContainer@98/MainScreen/@CanvasItemEditor@9331/@VSplitContainer@9153/@HSplitContainer@9155/@HSplitContainer@9157/@Control@9158/@SubViewportContainer@9159/@SubViewport@9160/player/body")
+
+[node name="mouse" type="Node3D" parent="skin/head"]
+
+[node name="head" type="MeshInstance3D" parent="skin/head/mouse"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.686566, 0)
+mesh = SubResource("SphereMesh_d8rtc")
+skeleton = NodePath("../../root/@EditorNode@17030/@Panel@13/@VBoxContainer@14/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@25/DockVSplitCenter/@VSplitContainer@52/@VBoxContainer@53/@PanelContainer@98/MainScreen/@CanvasItemEditor@9331/@VSplitContainer@9153/@HSplitContainer@9155/@HSplitContainer@9157/@Control@9158/@SubViewportContainer@9159/@SubViewport@9160/player/body")
+
+[node name="face" type="MeshInstance3D" parent="skin/head/mouse"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.686035, -0.0814021)
+mesh = SubResource("SphereMesh_adauk")
+skeleton = NodePath("../../root/@EditorNode@17030/@Panel@13/@VBoxContainer@14/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@25/DockVSplitCenter/@VSplitContainer@52/@VBoxContainer@53/@PanelContainer@98/MainScreen/@CanvasItemEditor@9331/@VSplitContainer@9153/@HSplitContainer@9155/@HSplitContainer@9157/@Control@9158/@SubViewportContainer@9159/@SubViewport@9160/player/body")
+
+[node name="eye" type="Node3D" parent="skin/head/mouse"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.700853, -0.330748)
 
-[node name="left_eye" type="MeshInstance3D" parent="skin/head/eye"]
+[node name="left_eye" type="MeshInstance3D" parent="skin/head/mouse/eye"]
 transform = Transform3D(1, 0, 0, 0, 0.173648, 0.984808, 0, -0.984808, 0.173648, 0.0749559, 0, 0)
 mesh = SubResource("SphereMesh_v1u5a")
 
-[node name="right_eye" type="MeshInstance3D" parent="skin/head/eye"]
+[node name="right_eye" type="MeshInstance3D" parent="skin/head/mouse/eye"]
 transform = Transform3D(1, 0, 0, 0, 0.173648, 0.984808, 0, -0.984808, 0.173648, -0.075, 0, 0)
 mesh = SubResource("SphereMesh_v1u5a")
+
+[node name="nose" type="MeshInstance3D" parent="skin/head/mouse"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.576384, -0.450044)
+mesh = SubResource("SphereMesh_ce7m5")
+skeleton = NodePath("../beak")
+
+[node name="beak" type="MeshInstance3D" parent="skin/head/mouse"]
+transform = Transform3D(1, 0, 0, 0, 0.173648, 0.984808, 0, -0.984808, 0.173648, 0, 0.537359, -0.233362)
+mesh = SubResource("CapsuleMesh_rycxo")
+skeleton = NodePath("../../root/@EditorNode@17030/@Panel@13/@VBoxContainer@14/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@25/DockVSplitCenter/@VSplitContainer@52/@VBoxContainer@53/@PanelContainer@98/MainScreen/@CanvasItemEditor@9331/@VSplitContainer@9153/@HSplitContainer@9155/@HSplitContainer@9157/@Control@9158/@SubViewportContainer@9159/@SubViewport@9160/player/body")
+
+[node name="ear_left" type="MeshInstance3D" parent="skin/head/mouse"]
+transform = Transform3D(0.866026, -0.482963, 0.12941, 0, 0.258819, 0.965926, -0.5, -0.836516, 0.224144, -0.35, 1, 0.075)
+mesh = SubResource("SphereMesh_ggbyi")
+skeleton = NodePath("../../root/@EditorNode@17030/@Panel@13/@VBoxContainer@14/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@25/DockVSplitCenter/@VSplitContainer@52/@VBoxContainer@53/@PanelContainer@98/MainScreen/@CanvasItemEditor@9331/@VSplitContainer@9153/@HSplitContainer@9155/@HSplitContainer@9157/@Control@9158/@SubViewportContainer@9159/@SubViewport@9160/player/body")
+
+[node name="ear_right" type="MeshInstance3D" parent="skin/head/mouse"]
+transform = Transform3D(0.866026, 0.482963, -0.12941, 0, 0.258819, 0.965926, 0.5, -0.836516, 0.224144, 0.35, 1, 0.075)
+mesh = SubResource("SphereMesh_ggbyi")
+skeleton = NodePath("../../root/@EditorNode@17030/@Panel@13/@VBoxContainer@14/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@25/DockVSplitCenter/@VSplitContainer@52/@VBoxContainer@53/@PanelContainer@98/MainScreen/@CanvasItemEditor@9331/@VSplitContainer@9153/@HSplitContainer@9155/@HSplitContainer@9157/@Control@9158/@SubViewportContainer@9159/@SubViewport@9160/player/body")
+
+[node name="mudskipper" type="Node3D" parent="skin/head"]
+visible = false
+
+[node name="head" type="MeshInstance3D" parent="skin/head/mudskipper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.686566, 0)
+mesh = SubResource("SphereMesh_4n1h5")
+skeleton = NodePath("../../root/@EditorNode@17030/@Panel@13/@VBoxContainer@14/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@25/DockVSplitCenter/@VSplitContainer@52/@VBoxContainer@53/@PanelContainer@98/MainScreen/@CanvasItemEditor@9331/@VSplitContainer@9153/@HSplitContainer@9155/@HSplitContainer@9157/@Control@9158/@SubViewportContainer@9159/@SubViewport@9160/player/body")
+
+[node name="face" type="MeshInstance3D" parent="skin/head/mudskipper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6727, -0.0614368)
+visible = false
+mesh = SubResource("SphereMesh_adauk")
+skeleton = NodePath("../../root/@EditorNode@17030/@Panel@13/@VBoxContainer@14/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@25/DockVSplitCenter/@VSplitContainer@52/@VBoxContainer@53/@PanelContainer@98/MainScreen/@CanvasItemEditor@9331/@VSplitContainer@9153/@HSplitContainer@9155/@HSplitContainer@9157/@Control@9158/@SubViewportContainer@9159/@SubViewport@9160/player/body")
+
+[node name="eye" type="Node3D" parent="skin/head/mudskipper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.700853, -0.330748)
+
+[node name="ear_left" type="MeshInstance3D" parent="skin/head/mudskipper"]
+transform = Transform3D(0.866026, -0.482963, 0.12941, 0, 0.258819, 0.965926, -0.5, -0.836516, 0.224144, -0.171756, 0.946, 0.075)
+mesh = SubResource("SphereMesh_rm5ma")
+skeleton = NodePath("../../root/@EditorNode@17030/@Panel@13/@VBoxContainer@14/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@25/DockVSplitCenter/@VSplitContainer@52/@VBoxContainer@53/@PanelContainer@98/MainScreen/@CanvasItemEditor@9331/@VSplitContainer@9153/@HSplitContainer@9155/@HSplitContainer@9157/@Control@9158/@SubViewportContainer@9159/@SubViewport@9160/player/body")
+
+[node name="right_eye" type="MeshInstance3D" parent="skin/head/mudskipper/ear_left"]
+transform = Transform3D(0.95319, 0.297776, -0.0525063, -0.292067, 0.951668, 0.0950074, 0.078259, -0.0752247, 0.994091, 0.064508, 0.111112, -0.0247486)
+mesh = SubResource("SphereMesh_v1u5a")
+skeleton = NodePath("../../eye")
+
+[node name="ear_right" type="MeshInstance3D" parent="skin/head/mudskipper"]
+transform = Transform3D(0.866026, 0.482963, -0.12941, 0, 0.258819, 0.965926, 0.5, -0.836516, 0.224144, 0.172, 0.946, 0.075)
+mesh = SubResource("SphereMesh_no72p")
+skeleton = NodePath("../../root/@EditorNode@17030/@Panel@13/@VBoxContainer@14/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@25/DockVSplitCenter/@VSplitContainer@52/@VBoxContainer@53/@PanelContainer@98/MainScreen/@CanvasItemEditor@9331/@VSplitContainer@9153/@HSplitContainer@9155/@HSplitContainer@9157/@Control@9158/@SubViewportContainer@9159/@SubViewport@9160/player/body")
+
+[node name="left_eye" type="MeshInstance3D" parent="skin/head/mudskipper/ear_right"]
+transform = Transform3D(0.953317, -0.297383, 0.0524369, 0.291681, 0.951788, 0.0949864, -0.0781557, -0.0752572, 0.994097, -0.0643335, 0.111771, -0.0244532)
+mesh = SubResource("SphereMesh_v1u5a")
+skeleton = NodePath("../../eye")
 
 [node name="body" type="Node3D" parent="skin"]
 
@@ -362,9 +389,6 @@ mesh = SubResource("SphereMesh_sn48k")
 [node name="target_slash_start" type="Marker3D" parent="skin/body/arm/arm_target/target_slash"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.817306, -0.406611, -1.02316)
 
-[node name="target_slash_mid" type="Marker3D" parent="skin/body/arm/arm_target/target_slash"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.093168, 0.136701, -1.40267)
-
 [node name="target_slash_end" type="Marker3D" parent="skin/body/arm/arm_target/target_slash"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.01028, 0.611347, -0.738855)
 
@@ -391,6 +415,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.55, 0.439529, -0.644731)
 [node name="target_falling_mid_left" type="Marker3D" parent="skin/body/arm/arm_target/target_falling"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55, 0.439529, -0.644731)
 
+[node name="feet" type="Node" parent="skin/body"]
+
+[node name="left_target" type="MeshInstance3D" parent="skin/body/feet"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.351133, 0.733488, 0)
+mesh = SubResource("SphereMesh_5yddk")
+
+[node name="right_target" type="MeshInstance3D" parent="skin/body/feet"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.351, 0.733, 0)
+mesh = SubResource("SphereMesh_2t6u4")
+
+[node name="feet_ray" type="RayCast3D" parent="skin/body/feet"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 3, 0)
+target_position = Vector3(0, -2, 0)
+
 [node name="tail" type="Node3D" parent="skin/body"]
 
 [node name="tail" type="MeshInstance3D" parent="skin/body/tail"]
@@ -398,30 +436,28 @@ transform = Transform3D(0.999998, -0.00176494, 0.000716791, 0.000405908, -0.1702
 mesh = SubResource("CylinderMesh_v3es2")
 skeleton = NodePath("../../root/@EditorNode@17030/@Panel@13/@VBoxContainer@14/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@25/DockVSplitCenter/@VSplitContainer@52/@VBoxContainer@53/@PanelContainer@98/MainScreen/@CanvasItemEditor@9331/@VSplitContainer@9153/@HSplitContainer@9155/@HSplitContainer@9157/@Control@9158/@SubViewportContainer@9159/@SubViewport@9160/player/body")
 
-[node name="feet_ray" type="RayCast3D" parent="skin/body"]
-transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0)
-target_position = Vector3(0, -2, 0)
+[node name="weapon" type="Node3D" parent="skin/body"]
 
-[node name="foot_ik_target" type="Node" parent="skin/body"]
+[node name="range" type="Node3D" parent="skin/body/weapon"]
 
-[node name="left_target" type="MeshInstance3D" parent="skin/body/foot_ik_target"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.351133, 0.733488, 0)
-mesh = SubResource("SphereMesh_5yddk")
+[node name="hit_box" type="Area3D" parent="skin/body/weapon/range"]
 
-[node name="right_target" type="MeshInstance3D" parent="skin/body/foot_ik_target"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.351, 0.733, 0)
-mesh = SubResource("SphereMesh_2t6u4")
+[node name="melee" type="Node3D" parent="skin/body/weapon"]
 
 [node name="vfx" type="Node3D" parent="skin/body"]
 
-[node name="vfx_running_dust" parent="skin/body/vfx" instance=ExtResource("15_bkycr")]
+[node name="running_dust_vfx" parent="skin/body/vfx" instance=ExtResource("15_bkycr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2, 0)
 emitting = false
 amount = 8
 lifetime = 0.3
 speed_scale = 1.0
 
-[node name="vfx_slash" parent="skin/body/vfx" instance=ExtResource("16_enbpp")]
+[node name="slash_vfx" parent="skin/body/vfx" instance=ExtResource("16_enbpp")]
+
+[node name="aposition" type="Node" parent="skin/body/vfx"]
+
+[node name="warp_start_vfx" parent="skin/body/vfx/aposition" instance=ExtResource("9_2w26g")]
 
 [node name="controller" type="Node" parent="."]
 
@@ -442,9 +478,8 @@ initial_state = NodePath("idle")
 [node name="idle" type="Node" parent="controller/movement_state_machine"]
 script = ExtResource("18_yj4js")
 
-[node name="walk" type="Node" parent="controller/movement_state_machine" node_paths=PackedStringArray("vfx_running_dust")]
+[node name="walk" type="Node" parent="controller/movement_state_machine"]
 script = ExtResource("21_nucca")
-vfx_running_dust = NodePath("../../../skin/body/vfx/vfx_running_dust")
 
 [node name="jump" type="Node" parent="controller/movement_state_machine"]
 script = ExtResource("20_bx6nq")
@@ -460,7 +495,8 @@ arm_target_fall_mid_left = NodePath("../../../skin/body/arm/arm_target/target_fa
 arm_target_default_right = NodePath("../../../skin/body/arm/arm_target/target_default_right")
 arm_target_default_left = NodePath("../../../skin/body/arm/arm_target/target_default_left")
 
-[node name="dash" type="Node" parent="controller/movement_state_machine"]
+[node name="warp" type="Node" parent="controller/movement_state_machine"]
+script = ExtResource("17_5og5j")
 
 [node name="position_state_machine" type="Node" parent="controller" node_paths=PackedStringArray("initial_state")]
 script = ExtResource("23_x3smm")
@@ -471,3 +507,20 @@ script = ExtResource("21_bjuqh")
 
 [node name="on_air" type="Node" parent="controller/position_state_machine"]
 script = ExtResource("24_ift68")
+
+[node name="skill_state_machine" type="Node" parent="controller" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("24_2gqg8")
+initial_state = NodePath("melee")
+
+[node name="melee" type="Node" parent="controller/skill_state_machine" node_paths=PackedStringArray("right_arm_target_slash_start", "right_arm_target_slash_end", "left_arm_target_slash_left")]
+script = ExtResource("25_pqlhu")
+right_arm_target_slash_start = NodePath("../../../skin/body/arm/arm_target/target_slash/target_slash_start")
+right_arm_target_slash_end = NodePath("../../../skin/body/arm/arm_target/target_slash/target_slash_end")
+left_arm_target_slash_left = NodePath("../../../skin/body/arm/arm_target/target_slash/target_slash_left")
+
+[node name="range" type="Node" parent="controller/skill_state_machine" node_paths=PackedStringArray("right_arm_target_slash_start", "right_arm_target_slash_end", "left_arm_target_slash_left")]
+script = ExtResource("26_3grhu")
+right_arm_target_slash_start = NodePath("../../../skin/body/arm/arm_target/target_slash/target_slash_start")
+right_arm_target_slash_end = NodePath("../../../skin/body/arm/arm_target/target_slash/target_slash_end")
+left_arm_target_slash_left = NodePath("../../../skin/body/arm/arm_target/target_slash/target_slash_left")
+projectile = ExtResource("14_8673b")

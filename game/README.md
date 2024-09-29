@@ -2,9 +2,11 @@
 
 ## TODO
 - [ ] dialog system
+- [ ] quest system
 - [ ] hitbox
 - [ ] disassemble artefact items
-- [ ] movement: zipzap
+- [x] movement: zipzap
+- [ ] movement: warp to enemy
 - [ ] skill: aim hold
 - [ ] skill: combo melee
 - [ ] game: victory

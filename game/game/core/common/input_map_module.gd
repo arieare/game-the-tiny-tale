@@ -54,6 +54,11 @@ func input_setting():
 	event_left_click.button_index = MOUSE_BUTTON_LEFT
 	InputMap.add_action("attack")
 	InputMap.action_add_event("attack", event_left_click)
+	
+	var event_right_click := InputEventMouseButton.new()
+	event_right_click.button_index = MOUSE_BUTTON_RIGHT
+	InputMap.add_action("warp")
+	InputMap.action_add_event("warp", event_right_click)	
 	#endregion
 	
 	#region camera input
